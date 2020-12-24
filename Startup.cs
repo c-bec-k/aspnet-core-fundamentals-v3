@@ -32,7 +32,7 @@ namespace aspnet_core_fundamentals_v3
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("You had me at 'hello'!");
                 });
             });
         }
