@@ -22,10 +22,11 @@ namespace aspnet_core_fundamentals_v3
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IGreeter, ConfigurationGreeter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IGreeter greeter)
         {
             if (env.IsDevelopment())
             {
@@ -38,7 +39,7 @@ namespace aspnet_core_fundamentals_v3
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(Config["greeting"]);
+                    await context.Response.WriteAsync(greeter.GetGreeting());
                 });
             });
         }
