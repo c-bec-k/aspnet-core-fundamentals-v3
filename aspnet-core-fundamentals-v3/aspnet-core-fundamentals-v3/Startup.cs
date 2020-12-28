@@ -22,6 +22,7 @@ namespace aspnet_core_fundamentals_v3
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddSingleton<IGreeter, ConfigurationGreeter>();
         }
 
@@ -39,18 +40,13 @@ namespace aspnet_core_fundamentals_v3
                 });
             }
 
-            app.UseFileServer();
-
-            app.UseWelcomePage(new WelcomePageOptions { Path = "/welcome" });
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/hello", async context =>
-                {
-                    await context.Response.WriteAsync(greeter.GetGreeting());
-                });
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
