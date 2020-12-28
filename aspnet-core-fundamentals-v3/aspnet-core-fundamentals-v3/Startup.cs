@@ -39,15 +39,16 @@ namespace aspnet_core_fundamentals_v3
                 });
             }
 
+            app.UseFileServer();
+
             app.UseWelcomePage(new WelcomePageOptions { Path = "/welcome" });
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapGet("/hello", async context =>
                 {
-                    throw new Exception("Something went wrong");
                     await context.Response.WriteAsync(greeter.GetGreeting());
                 });
             });
