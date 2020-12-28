@@ -31,6 +31,12 @@ namespace aspnet_core_fundamentals_v3
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            } else
+            {
+                app.UseExceptionHandler(new ExceptionHandlerOptions
+                {
+                    ExceptionHandler = context => context.Response.WriteAsync("I can't let you do that, Dave.")
+                });
             }
 
             app.UseWelcomePage(new WelcomePageOptions { Path = "/welcome" });
@@ -41,6 +47,7 @@ namespace aspnet_core_fundamentals_v3
             {
                 endpoints.MapGet("/", async context =>
                 {
+                    throw new Exception("Something went wrong");
                     await context.Response.WriteAsync(greeter.GetGreeting());
                 });
             });
