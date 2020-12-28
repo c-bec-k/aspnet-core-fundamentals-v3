@@ -33,6 +33,8 @@ namespace aspnet_core_fundamentals_v3
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseWelcomePage(new WelcomePageOptions { Path = "/welcome" });
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
