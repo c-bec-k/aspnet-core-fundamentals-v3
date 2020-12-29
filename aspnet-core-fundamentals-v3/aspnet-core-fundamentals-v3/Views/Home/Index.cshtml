@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SimpleCrm.Customer>
+﻿@model aspnet_core_fundamentals_v3.Models.Home.HomePageViewModel
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
   </head>
   <body>
       <h1>Customers</h1>
-      <p>Hello and welcome to the customers page!</p>
+      <p>@Model.CurrentMessage</p>
       <table>
           <thead>
             <td>Customer Number</td>
@@ -18,7 +18,7 @@
             <td>Customer Phone Number</td>
           </thead>
           <tbody>
-            @foreach(var customer in Model)
+            @foreach(var customer in Model.Customers)
             {
                 <tr>
                     <td>@customer.Id</td>
