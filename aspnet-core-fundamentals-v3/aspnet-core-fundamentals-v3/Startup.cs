@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SimpleCrm;
 
 namespace aspnet_core_fundamentals_v3
 {
@@ -24,6 +25,7 @@ namespace aspnet_core_fundamentals_v3
         {
             services.AddMvc();
             services.AddSingleton<IGreeter, ConfigurationGreeter>();
+            services.AddScoped<ICustomerData, InMemoryCustomerData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

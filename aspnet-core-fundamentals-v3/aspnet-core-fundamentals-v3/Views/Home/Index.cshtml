@@ -1,4 +1,4 @@
-﻿@model aspnet_core_fundamentals_v3.Models.CustomerModel
+﻿@model IEnumerable<SimpleCrm.Customer>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,26 @@
     <title>Simple CRM</title>
   </head>
   <body>
-      <h1>Hello, @Model.FirstName!</h1>
-      
+      <h1>Customers</h1>
+      <p>Hello and welcome to the customers page!</p>
+      <table>
+          <thead>
+            <td>Customer Number</td>
+            <td>Customer First Name</td>
+            <td>Customer Last Name</td>
+            <td>Customer Phone Number</td>
+          </thead>
+          <tbody>
+            @foreach(var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.PhoneNumber</td>
+                </tr>
+            }
+          </tbody>
+      </table>
   </body>
 </html>
