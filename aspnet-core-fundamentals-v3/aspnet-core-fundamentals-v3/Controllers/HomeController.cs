@@ -15,6 +15,13 @@ namespace aspnet_core_fundamentals_v3.Controllers
             _greeter = greeter;
         }
 
+        public IActionResult Details(int id)
+        {
+            var customer =  _customerData.Get(id);
+            if (customer == null) { return RedirectToAction(nameof(Index)); }
+            return View(customer);
+        }
+
         public IActionResult Index()
         {
             var model = new HomePageViewModel();

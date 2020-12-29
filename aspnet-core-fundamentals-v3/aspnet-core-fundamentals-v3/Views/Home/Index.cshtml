@@ -12,6 +12,8 @@
       <p>@Model.CurrentMessage</p>
       <table>
           <thead>
+            <td></td>
+            <td></td>
             <td>Customer Number</td>
             <td>Customer First Name</td>
             <td>Customer Last Name</td>
@@ -21,6 +23,8 @@
             @foreach(var customer in Model.Customers)
             {
                 <tr>
+                    <td><a href="/home/details/@customer.Id">Details</a></td>
+                    <td>@Html.ActionLink("View","Details", new { id = customer.Id})</td>
                     <td>@customer.Id</td>
                     <td>@customer.FirstName</td>
                     <td>@customer.LastName</td>

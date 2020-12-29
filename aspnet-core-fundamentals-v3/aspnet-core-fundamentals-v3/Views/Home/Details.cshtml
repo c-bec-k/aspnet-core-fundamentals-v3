@@ -1,0 +1,23 @@
+﻿@using aspnet_core_fundamentals_v3.Controllers
+@model SimpleCrm.Customer
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Simple CRM</title>
+</head>
+<body>
+    <h1>@Model.Id</h1>
+    <section>
+        <ul>
+            <li>@Model.Id</li>
+            <li>@Model.FirstName</li>
+            <li>@Model.LastName</li>
+            <li>@Model.PhoneNumber</li>
+        </ul>
+        <p>@Html.ActionLink("🔙", nameof(HomeController.Index))</p>
+    </section>
+</body>
+</html>
