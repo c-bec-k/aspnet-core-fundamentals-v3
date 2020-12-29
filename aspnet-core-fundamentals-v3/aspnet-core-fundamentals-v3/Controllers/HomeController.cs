@@ -1,11 +1,14 @@
-﻿using System;
+﻿using aspnet_core_fundamentals_v3.Models;
+using Microsoft.AspNetCore.Mvc;
+
 namespace aspnet_core_fundamentals_v3.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hello from the HomeController!";
+            var model = new CustomerModel(1, "Christopher", "Ruthenbeck", "512.555.5555");
+            return new ObjectResult(model);
         }
     }
 }
