@@ -8,7 +8,7 @@ namespace aspnet_core_fundamentals_v3.Controllers
         public IActionResult Index()
         {
             var model = new CustomerModel(1, "Christopher", "Ruthenbeck", "512.555.5555");
-            return new ObjectResult(model);
+            return View(model);
         }
     }
 }
