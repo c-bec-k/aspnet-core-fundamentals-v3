@@ -29,5 +29,10 @@ namespace aspnet_core_fundamentals_v3.Controllers
             model.CurrentMessage = _greeter.GetGreeting();
             return View(model);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
