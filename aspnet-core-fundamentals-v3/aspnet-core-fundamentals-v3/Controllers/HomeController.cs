@@ -38,6 +38,7 @@ namespace aspnet_core_fundamentals_v3.Controllers
         }
 
         [HttpPost()]
+        [ValidateAntiForgeryToken()]
         public IActionResult Create(CustomerEditViewModel model)
         {
             if (ModelState.IsValid)

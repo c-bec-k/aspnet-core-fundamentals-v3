@@ -9,6 +9,9 @@
     <ProjectReference Include="..\SimpleCrm\SimpleCrm.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\SimpleCrm.SqlDbServices\SimpleCrm.SqlDbServices.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
