@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleCrm;
+using SimpleCrm.SqlDbServices;
 
 namespace aspnet_core_fundamentals_v3
 {
@@ -25,7 +27,8 @@ namespace aspnet_core_fundamentals_v3
         {
             services.AddMvc();
             services.AddSingleton<IGreeter, ConfigurationGreeter>();
-            services.AddScoped<ICustomerData, InMemoryCustomerData>();
+            services.AddScoped<ICustomerData, SqlCustomerData>();
+            services.AddDbContext<SimpleCrmDbContext>(options => options.UseNpgsql(Config.GetConnectionString("SimpleCrmConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
