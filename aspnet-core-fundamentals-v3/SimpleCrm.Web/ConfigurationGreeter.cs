@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace aspnet_core_fundamentals_v3
+namespace SimpleCrm.Web
 {
     public class ConfigurationGreeter : IGreeter
     {

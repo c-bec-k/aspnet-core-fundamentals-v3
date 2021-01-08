@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>aspnet_core_fundamentals_v3</RootNamespace>
+    <RootNamespace>SimpleCrm.Web</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'aspnet_core_fundamentals_v3' " />
   <ItemGroup>
     <ProjectReference Include="..\SimpleCrm\SimpleCrm.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>

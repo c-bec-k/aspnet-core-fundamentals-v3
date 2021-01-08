@@ -1,5 +1,5 @@
 ﻿using System;
-namespace aspnet_core_fundamentals_v3
+namespace SimpleCrm.Web
 {
     public interface IGreeter
     {

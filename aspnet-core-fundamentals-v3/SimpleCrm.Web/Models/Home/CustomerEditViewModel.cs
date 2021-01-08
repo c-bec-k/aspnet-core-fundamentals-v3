@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace aspnet_core_fundamentals_v3.Models.Home
+namespace SimpleCrm.Web.Models.Home
 {
     public class CustomerEditViewModel
     {

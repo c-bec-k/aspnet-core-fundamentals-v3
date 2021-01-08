@@ -1,5 +1,5 @@
 ﻿using System;
-namespace aspnet_core_fundamentals_v3.Models
+namespace SimpleCrm.Web.Models
 {
     public class CustomerModel
     {

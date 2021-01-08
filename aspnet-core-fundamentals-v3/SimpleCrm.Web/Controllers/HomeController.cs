@@ -1,9 +1,8 @@
 ﻿using System;
-using aspnet_core_fundamentals_v3.Models.Home;
+using SimpleCrm.Web.Models.Home;
 using Microsoft.AspNetCore.Mvc;
-using SimpleCrm;
 
-namespace aspnet_core_fundamentals_v3.Controllers
+namespace SimpleCrm.Web.Controllers
 {
     public class HomeController : Controller
     {

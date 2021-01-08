@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace aspnet_core_fundamentals_v3.Controllers
+namespace SimpleCrm.Web.Controllers
 {
     [Route("about")]
     public class AboutController

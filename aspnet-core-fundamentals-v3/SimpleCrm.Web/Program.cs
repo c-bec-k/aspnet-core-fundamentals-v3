@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace aspnet_core_fundamentals_v3
+namespace SimpleCrm.Web
 {
     public class Program
     {

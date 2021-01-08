@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.809.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnet-core-fundamentals-v3", "aspnet-core-fundamentals-v3\aspnet-core-fundamentals-v3.csproj", "{8564B596-1F60-4DF7-B532-1DF668A25DF0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrm", "SimpleCrm\SimpleCrm.csproj", "{01332E51-5770-4FE8-9AC9-91DAC9718715}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrm.SqlDbServices", "SimpleCrm.SqlDbServices\SimpleCrm.SqlDbServices.csproj", "{A65C9AA4-6533-4AD6-BEC5-22231B69A0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrm.Web", "SimpleCrm.Web\SimpleCrm.Web.csproj", "{9CC08AF8-8C10-438D-8870-A802E2E30248}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8564B596-1F60-4DF7-B532-1DF668A25DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8564B596-1F60-4DF7-B532-1DF668A25DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8564B596-1F60-4DF7-B532-1DF668A25DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8564B596-1F60-4DF7-B532-1DF668A25DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01332E51-5770-4FE8-9AC9-91DAC9718715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01332E51-5770-4FE8-9AC9-91DAC9718715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01332E51-5770-4FE8-9AC9-91DAC9718715}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{A65C9AA4-6533-4AD6-BEC5-22231B69A0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A65C9AA4-6533-4AD6-BEC5-22231B69A0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A65C9AA4-6533-4AD6-BEC5-22231B69A0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC08AF8-8C10-438D-8870-A802E2E30248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC08AF8-8C10-438D-8870-A802E2E30248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC08AF8-8C10-438D-8870-A802E2E30248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC08AF8-8C10-438D-8870-A802E2E30248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using SimpleCrm;
 using SimpleCrm.SqlDbServices;
 
-namespace aspnet_core_fundamentals_v3
+namespace SimpleCrm.Web
 {
     public class Startup
     {
