@@ -1,39 +1,36 @@
 ﻿@model SimpleCrm.Web.Models.Home.HomePageViewModel
+@{
+    ViewBag.Title = "Customers";
+    Layout = "_Layout";
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Simple CRM</title>
-</head>
-<body>
-    <h1>Customers</h1>
-    <p>@Model.CurrentMessage</p>
-    <table>
-        <thead>
+<h1>Customers</h1>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Customer Number</th>
+            <th>Customer First Name</th>
+            <th>Customer Last Name</th>
+            <th>Customer Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
             <tr>
-                <th></th>
-                <th></th>
-                <th>Customer Number</th>
-                <th>Customer First Name</th>
-                <th>Customer Last Name</th>
-                <th>Customer Phone Number</th>
+                <td><a href="/home/details/@customer.Id">Details</a></td>
+                <td>@Html.ActionLink("View", "Details", new { id = customer.Id })</td>
+                <td>@customer.Id</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.PhoneNumber</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in Model.Customers)
-            {
-                <tr>
-                    <td><a href="/home/details/@customer.Id">Details</a></td>
-                    <td>@Html.ActionLink("View", "Details", new { id = customer.Id })</td>
-                    <td>@customer.Id</td>
-                    <td>@customer.FirstName</td>
-                    <td>@customer.LastName</td>
-                    <td>@customer.PhoneNumber</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+        }
+    </tbody>
+</table>
+
+@section footer {
+    <p>@Model.CurrentMessage</p>
+}
