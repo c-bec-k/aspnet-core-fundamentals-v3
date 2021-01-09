@@ -1,48 +1,38 @@
 ﻿@using SimpleCrm
 @model SimpleCrm.Web.Models.Home.CustomerEditViewModel
-@{
+@{ ViewBag.Title = "Simple CRM | New Customer";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Simple CRM | New Customer</title>
-</head>
-<body>
-    <h1>Create New Customer</h1>
+<h1>Create New Customer</h1>
 
-    <section>
-        @using (Html.BeginForm())
-        {
-            <div>
-                @Html.LabelFor(x => x.FirstName)
-                @Html.TextBoxFor(x => x.FirstName)
-                @Html.ValidationMessageFor(x => x.FirstName)
-            </div>
-            <div>
-                @Html.LabelFor(x => x.LastName)
-                @Html.TextBoxFor(x => x.LastName)
-                @Html.ValidationMessageFor(x => x.LastName)
-            </div>
-            <div>
-                @Html.LabelFor(x => x.PhoneNumber)
-                @Html.EditorFor(x => x.PhoneNumber)
-                @Html.ValidationMessageFor(x => x.PhoneNumber)
-            </div>
-            <div>
-                @Html.LabelFor(x => x.Type)
-                @Html.DropDownListFor(x => x.Type, Html.GetEnumSelectList(typeof(CustomerType)))
-                @Html.ValidationMessageFor(x => x.Type)
-            </div>
-            <div>
-                @Html.LabelFor(x => x.OptInNewsletter)
-                @Html.CheckBoxFor(x => x.OptInNewsletter)
-                @Html.ValidationMessageFor(x => x.OptInNewsletter)
-            </div>
-            <button type="submit">Add New Customer</button>
-        }
-    </section>
-</body>
-</html>
+<section>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.FirstName)
+            @Html.TextBoxFor(x => x.FirstName)
+            @Html.ValidationMessageFor(x => x.FirstName)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.LastName)
+            @Html.TextBoxFor(x => x.LastName)
+            @Html.ValidationMessageFor(x => x.LastName)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.PhoneNumber)
+            @Html.EditorFor(x => x.PhoneNumber)
+            @Html.ValidationMessageFor(x => x.PhoneNumber)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.Type)
+            @Html.DropDownListFor(x => x.Type, Html.GetEnumSelectList(typeof(CustomerType)))
+            @Html.ValidationMessageFor(x => x.Type)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.OptInNewsletter)
+            @Html.CheckBoxFor(x => x.OptInNewsletter)
+            @Html.ValidationMessageFor(x => x.OptInNewsletter)
+        </div>
+        <button type="submit">Add New Customer</button>
+    }
+</section>
