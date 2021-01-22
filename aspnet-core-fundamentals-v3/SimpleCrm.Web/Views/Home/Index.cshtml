@@ -4,36 +4,13 @@
 }
 
 <h1>Customers</h1>
-<table>
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>Customer Number</th>
-            <th>Customer First Name</th>
-            <th>Customer Last Name</th>
-            <th>Customer Phone Number</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var customer in Model.Customers)
-        {
-        <tr>
-            <td><a asp-controller="Home" asp-action="Details" asp-route-id="@customer.Id">Details</a></td>
-            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@customer.Id">Edit</a></td>
-            <td>@Html.ActionLink("View", "Details", new { id = customer.Id })</td>
-            <td>@customer.Id</td>
-            <td>@customer.FirstName</td>
-            <td>@customer.LastName</td>
-            <td>@customer.PhoneNumber</td>
-        </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Create" asp-controller="Home">Create</a>
-
+<main>
+    @foreach (var customer in Model.Customers)
+    {
+        <partial name="_Summary" model="customer" />
+    }
+    <a asp-action="Create" asp-controller="Home">Create</a>
+</main>
 @section footer {
     <p>@Model.CurrentMessage</p>
 }

@@ -1,0 +1,9 @@
+﻿@model Customer
+
+<section>
+    <h3>@Model.FirstName @Model.LastName | @Model.Type</h3>
+    <ul>
+        <li><a asp-action="Details" asp-route-id="@Model.Id">Details</a></li>
+        <li><a asp-action="Edit" asp-route-id="@Model.Id">Edit</a></li>
+    </ul>
+</section>
