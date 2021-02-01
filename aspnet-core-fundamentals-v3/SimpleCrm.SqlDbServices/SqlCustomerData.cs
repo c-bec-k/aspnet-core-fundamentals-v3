@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpleCrm.SqlDbServices
 {
-    public class SqlCustomerData : ICustomerData
+  public class SqlCustomerData : ICustomerData
     {
         private SimpleCrmDbContext _context;
 
