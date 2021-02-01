@@ -25,6 +25,8 @@
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\Greeting\" />
+    <Folder Include="Models\Account\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.11" />

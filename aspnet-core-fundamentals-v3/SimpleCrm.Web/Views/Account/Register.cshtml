@@ -1,0 +1,38 @@
+﻿@model RegisterUserViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h1>Register</h1>
+
+<form method="post" asp-antiforgery="true">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <fieldset>
+        <label asp-for="DisplayName"></label>
+        <input asp-for="DisplayName" />
+        <span asp-validation-for="DisplayName"></span>
+    </fieldset>
+
+    <fieldset>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </fieldset>
+
+    <fieldset>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </fieldset>
+
+    <fieldset>
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </fieldset>
+
+    <input type="submit" value="Register" />
+
+</form>
