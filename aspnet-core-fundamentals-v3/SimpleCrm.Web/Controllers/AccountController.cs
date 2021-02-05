@@ -17,6 +17,38 @@ namespace SimpleCrm.Web.Controllers
     }
 
     [HttpGet()]
+    public IActionResult Login(string returnUrl)
+    {
+      return View();
+    }
+
+    [HttpPost()]
+    public async Task<IActionResult> Login(LoginUserViewModel model)
+    {
+      if (ModelState.IsValid)
+      {
+        var loginUser = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+
+        if (loginUser.Succeeded)
+        {
+          if (Url.IsLocalUrl(model.ReturnUrl))
+          {
+            return Redirect(model.ReturnUrl);
+          }
+
+          return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+          ModelState.AddModelError("", "Invalid email and/or password");
+        }
+      } 
+
+
+      return View();
+    }
+
+    [HttpGet()]
     public IActionResult Register()
     {
       return View();
@@ -49,6 +81,13 @@ namespace SimpleCrm.Web.Controllers
 
       return View();
 
+    }
+
+    [HttpPost(), ValidateAntiForgeryToken()]
+    public async Task<IActionResult> Logout()
+    {
+      await signInManager.SignOutAsync();
+      return RedirectToAction("Index", "Home");
     }
   }
 }
