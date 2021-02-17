@@ -13,3 +13,11 @@
 .mdl-textfield__error.field-validation-error {
   visibility: visible;
 }
+
+/* Login error  */
+
+.validation-summary-errors li {
+  list-style: none;
+  color: #d50000;
+  font-size: 12px;
+}
