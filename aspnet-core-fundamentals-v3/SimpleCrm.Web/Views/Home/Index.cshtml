@@ -2,12 +2,15 @@
 @{
     ViewBag.Title = "Customers";
 }
-
-<h1>Customers</h1>
-<main>
-    @foreach (var customer in Model.Customers)
-    {
-        <partial name="_Summary" model="customer" />
-    }
-    <a asp-action="Create" asp-controller="Home">Create</a>
-</main>
+<div class="content">
+    <h1>Customers</h1>
+    <main>
+        <div class="mdl-list">
+            @foreach (var customer in Model.Customers)
+            {
+                <partial name="_Summary" model="customer" />
+            }
+        </div>
+        <a asp-action="Create" asp-controller="Home">Create</a>
+    </main>
+</div>
