@@ -6,31 +6,38 @@
 
 <section>
     <form method="post" asp-antiforgery="true">
-        <div>
-            <label asp-for="FirstName"></label>
-            <input asp-for="FirstName" />
-            <span asp-validation-for="FirstName"></span>
+        <div class="mdl-cell mdl-cell--12-col page-row">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--9-col mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="FirstName" class="mdl-textfield__label"></label>
+                    <input asp-for="FirstName" class="mdl-textfield__input" />
+                    <span asp-validation-for="FirstName" class="mdl-textfield__error"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="LastName" class="mdl-textfield__label"></label>
+                    <input asp-for="LastName" class="mdl-textfield__input" />
+                    <span asp-validation-for="LastName" class="mdl-textfield__error"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="PhoneNumber" class="mdl-textfield__label"></label>
+                    <input asp-for="PhoneNumber" class="mdl-textfield__input" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="Type" class="mdl-textfield__label"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList(typeof(CustomerType))" class="mdl-textfield__input"></select>
+                    <span asp-validation-for="Type"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="OptInNewsletter" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                        <input asp-for="OptInNewsletter" class="mdl-checkbox__input" />
+                        <span class="mdl-checkbox__label">Opt Into the Newsletter?</span>
+                    </label>
+                    
+                    <span asp-validation-for="OptInNewsletter"></span>
+                </div>
+            </div>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Edit Customer</button>
         </div>
-        <div>
-            <label asp-for="LastName"></label>
-            <input asp-for="LastName" />
-            <span asp-validation-for="LastName"></span>
-        </div>
-        <div>
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" />
-            <span asp-validation-for="PhoneNumber"></span>
-        </div>
-        <div>
-            <label asp-for="Type"></label>
-            <select asp-for="Type" asp-items="Html.GetEnumSelectList(typeof(CustomerType))"></select>
-            <span asp-validation-for="Type"></span>
-        </div>
-        <div>
-            <label asp-for="OptInNewsletter"></label>
-            <input asp-for="OptInNewsletter" />
-            <span asp-validation-for="OptInNewsletter"></span>
-        </div>
-        <button type="submit">Add New Customer</button>
-    </form>
+</form>
 </section>

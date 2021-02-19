@@ -11,7 +11,7 @@
   {
     "outputFileName": "wwwroot/css/vendor.min.css",
     "inputFiles": [
-      "node_modules/material-design-lite/dist/material.amber-blue.min.css"
+      "node_modules/material-design-lite/dist/material.blue-deep_purple.min.css"
     ],
     "minify": {
       "enabled": false 

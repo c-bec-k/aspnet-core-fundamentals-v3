@@ -5,33 +5,39 @@
 <h1>Create New Customer</h1>
 
 <section>
-    @using (Html.BeginForm())
-    {
-        <div>
-            @Html.LabelFor(x => x.FirstName)
-            @Html.EditorFor(x => x.FirstName)
-            @Html.ValidationMessageFor(x => x.FirstName)
+    <form method="post" asp-antiforgery="true">
+        <div class="mdl-cell mdl-cell--12-col page-row">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--9-col mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="FirstName" class="mdl-textfield__label"></label>
+                    <input asp-for="FirstName" class="mdl-textfield__input" />
+                    <span asp-validation-for="FirstName" class="mdl-textfield__error"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="LastName" class="mdl-textfield__label"></label>
+                    <input asp-for="LastName" class="mdl-textfield__input" />
+                    <span asp-validation-for="LastName" class="mdl-textfield__error"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="PhoneNumber" class="mdl-textfield__label"></label>
+                    <input asp-for="PhoneNumber" class="mdl-textfield__input" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="Type" class="mdl-textfield__label"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList(typeof(CustomerType))" class="mdl-textfield__input"></select>
+                    <span asp-validation-for="Type"></span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col page-row">
+                    <label asp-for="OptInNewsletter" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                        <input asp-for="OptInNewsletter" class="mdl-checkbox__input" />
+                        <span class="mdl-checkbox__label">Opt Into the Newsletter?</span>
+                    </label>
+
+                    <span asp-validation-for="OptInNewsletter"></span>
+                </div>
+            </div>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Add New Customer</button>
         </div>
-        <div>
-            @Html.LabelFor(x => x.LastName)
-            @Html.EditorFor(x => x.LastName)
-            @Html.ValidationMessageFor(x => x.LastName)
-        </div>
-        <div>
-            @Html.LabelFor(x => x.PhoneNumber)
-            @Html.EditorFor(x => x.PhoneNumber)
-            @Html.ValidationMessageFor(x => x.PhoneNumber)
-        </div>
-        <div>
-            @Html.LabelFor(x => x.Type)
-            @Html.DropDownListFor(x => x.Type, Html.GetEnumSelectList(typeof(CustomerType)))
-            @Html.ValidationMessageFor(x => x.Type)
-        </div>
-        <div>
-            @Html.LabelFor(x => x.OptInNewsletter)
-            @Html.CheckBoxFor(x => x.OptInNewsletter)
-            @Html.ValidationMessageFor(x => x.OptInNewsletter)
-        </div>
-        <button type="submit">Add New Customer</button>
-    }
+    </form>
 </section>
