@@ -4,6 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerListPageComponent } from './customer-list-page/customer-list-page.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CustomerListPageComponent } from './customer-list-page/customer-list-pa
     CommonModule,
     CustomerRoutingModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ]
 })
 export class CustomerModule { }
