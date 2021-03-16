@@ -5,6 +5,8 @@ import {MatTableModule} from '@angular/material/table';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerListPageComponent } from './customer-list-page/customer-list-page.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CustomerService } from './customer.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,9 +14,11 @@ import { MatSortModule } from '@angular/material/sort';
   imports: [
     CommonModule,
     CustomerRoutingModule,
+    HttpClientModule,
     MatCardModule,
     MatTableModule,
     MatSortModule
-  ]
+  ],
+  providers: [CustomerService]
 })
 export class CustomerModule { }
