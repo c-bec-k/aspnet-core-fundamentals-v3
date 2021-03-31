@@ -8,6 +8,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { CustomerService } from './customer.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerMockService } from './customer-mock.service';
+import { FlexLayoutModule}  from '@angular/flex-layout';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { CustomerMockService } from './customer-mock.service';
     HttpClientModule,
     MatCardModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     {
