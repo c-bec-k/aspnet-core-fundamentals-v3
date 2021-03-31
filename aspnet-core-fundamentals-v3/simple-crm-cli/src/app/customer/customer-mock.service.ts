@@ -16,9 +16,11 @@ export class CustomerMockService extends CustomerService {
 
     const localCustomers = localStorage.getItem('customers');
   if (localCustomers) {
+    console.log('reading localCustomers storage')
     this.customers = JSON.parse(localCustomers);
   } else {
-    this.customers = [{
+    console.log('No localCustomers storage')
+    this.customers.push({
       customerId: 1,
       firstName: 'John',
       lastName: 'Smith',
@@ -27,21 +29,12 @@ export class CustomerMockService extends CustomerService {
       statusCode: 'Prospect',
       preferredContactMethod: 'phone',
       lastContactDate: new Date().toISOString()
-    },
-    {
-      customerId: 2,
-      firstName: 'Tory',
-      lastName: 'Amos',
-      phoneNumber: '314-555-9873',
-      emailAddress: 'tory@example.com',
-      statusCode: 'Prospect',
-      preferredContactMethod: 'email',
-      lastContactDate: new Date().toISOString()
-    }];
+    });
   }
   }
 
   search(term: string): Observable<Customer[]> {
+    if (!term) return of(this.customers);
     const results = this.customers.filter(c => (c.firstName.indexOf(term) > 0 ||
     c.lastName.indexOf(term) > 0 ||
     c.phoneNumber.indexOf(term) > 0 ||
@@ -58,9 +51,9 @@ export class CustomerMockService extends CustomerService {
   }
 
   update(customer: Customer): Observable<Customer> {
-    const foundCustomer = this.customers.filter(c => c.customerId === customerId);
+    const foundCustomer = this.customers.filter(c => c.customerId === customer.customerId);
     if(foundCustomer) {
-      this.customers = this.customers.map(c => c.customerId === customerId ? customer : c);
+      this.customers = this.customers.map(c => c.customerId === customer.customerId ? customer : c);
     } else {
       this.customers = [...this.customers, customer];
     }

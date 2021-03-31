@@ -27,7 +27,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort = this.sort;
   }
 
 }

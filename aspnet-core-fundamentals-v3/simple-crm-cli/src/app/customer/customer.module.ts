@@ -7,6 +7,7 @@ import { CustomerListPageComponent } from './customer-list-page/customer-list-pa
 import { MatSortModule } from '@angular/material/sort';
 import { CustomerService } from './customer.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerMockService } from './customer-mock.service';
 
 
 @NgModule({
@@ -19,6 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatSortModule
   ],
-  providers: [CustomerService]
+  providers: [
+    {
+      provide: CustomerService,
+      useClass: CustomerMockService
+
+    }]
 })
 export class CustomerModule { }
