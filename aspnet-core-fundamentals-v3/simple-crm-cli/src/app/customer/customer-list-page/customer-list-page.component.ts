@@ -4,6 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { CustomerService } from '../customer.service';
 import { Observable } from 'rxjs';
+import { CustomerCreateDialogComponent } from '../customer-create-dialog/customer-create-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'crm-customer-list-page',
@@ -18,7 +21,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
 
 
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, public dialog: MatDialog) {
     this.customers$ = this.customerService.search('');
   }
 
@@ -28,6 +31,13 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
+  }
+
+  addCustomer(){
+    const dialogRef = this.dialog.open(CustomerCreateDialogComponent, {
+      width: '10rem',
+      data: null
+    });
   }
 
 }
