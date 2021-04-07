@@ -1,8 +1,32 @@
 <mat-dialog-content>
-  <p>customer-create-dialog works!</p>
+  <form [formGroup]="detailForm" novalidate>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" name="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" name="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber" name="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email address</mat-label>
+      <input matInput formControlName="emailAddress" name="emailAddress">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Preferred Contact Method</mat-label>
+      <select matNativeControl formControlName="preferredContactMethod" name="preferredContactMethod">
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+      </select>
+    </mat-form-field>
+
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="save()" color="accent">Save</button>
+  <button mat-raised-button (click)="save()" color="accent">Save</button>
 </mat-dialog-actions>
-
