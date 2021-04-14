@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Customer } from '../customer.model';
 
@@ -17,10 +17,10 @@ export class CustomerCreateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Customer | null
     ) {
       this.detailForm = this.fb.group({
-        firstName: [''],
-        lastName: [''],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
         phoneNumber: [''],
-        emailAddress: [''],
+        emailAddress: ['', [Validators.required, Validators.email]],
         preferredContactMethod: ['email']
       });
       if (this.data) {
@@ -29,7 +29,8 @@ export class CustomerCreateDialogComponent implements OnInit {
     }
 
   save() {
-    const customer = {};
+    if (!this.detailForm.valid) return;
+    const customer = {...this.data, ...this.detailForm.value};
     this.dialogRef.close(customer);
   }
   cancel() { this.dialogRef.close() }
