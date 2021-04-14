@@ -6,6 +6,7 @@ import { CustomerService } from '../customer.service';
 import { Observable } from 'rxjs';
 import { CustomerCreateDialogComponent } from '../customer-create-dialog/customer-create-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,17 +18,26 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   customers$!: Observable<Customer[]>;
 
   dataSource!: MatTableDataSource<Customer>; // The ! tells Angular you know it may be used before it is set.  Try it without to see the error
-  displayColumns = ['name', 'phoneNumber', 'emailAddress', 'statusCode'];
+  displayColumns = ['name', 'phoneNumber', 'emailAddress', 'statusCode','edit'];
 
 
 
-  constructor(private customerService: CustomerService, public dialog: MatDialog) {
+  constructor(
+    private customerService: CustomerService,
+    private router: Router,
+    public dialog: MatDialog
+    ) {
     this.customers$ = this.customerService.search('');
   }
 
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void { }
+  openDetail(item: Customer): void {
+    if(item) {
+      this.router.navigate([`./customer/${item.customerId}`])
+    }
+  }
 
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
