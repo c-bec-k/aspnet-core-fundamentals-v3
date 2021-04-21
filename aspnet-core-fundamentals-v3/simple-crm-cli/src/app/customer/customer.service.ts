@@ -22,5 +22,9 @@ export class CustomerService {
     return this.http.put<Customer>(`api/customer/${customer.customerId}`, customer);
   }
 
+  get(customerId: number): Observable<Customer | undefined> {
+    return this.http.get<Customer>(`/api/customer/${customerId}`);
+  }
+
 
 }

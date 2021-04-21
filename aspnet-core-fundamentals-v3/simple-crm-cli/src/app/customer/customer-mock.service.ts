@@ -61,4 +61,9 @@ export class CustomerMockService extends CustomerService {
     return of(customer);
   }
 
+  get(customerId: number): Observable<Customer | undefined> {
+    const item = this.customers.find(c => c.customerId === customerId);
+    return of(item);
+  }
+
 }
