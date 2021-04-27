@@ -26,5 +26,4 @@ export class CustomerService {
     return this.http.get<Customer>(`/api/customer/${customerId}`);
   }
 
-
 }
