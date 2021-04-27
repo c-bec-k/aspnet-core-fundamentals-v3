@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Customer } from '../customer.model';
 import { CustomerService } from '../customer.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'crm-customer-detail',
@@ -17,7 +18,8 @@ export class CustomerDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    // private snackBar: MatSnackBar
     ) {
       this.createForm();
      }
@@ -32,9 +34,23 @@ export class CustomerDetailComponent implements OnInit {
        })
      }
 
+
+
+    cancel() { return }
+
   ngOnInit(): void {
     this.customerId = parseInt(this.route.snapshot.params.id, 10)
-    this.customerService.get(this.customerId).subscribe(cust => {if (cust) this.customer = cust});
-  }
+    this.customerService.get(this.customerId).subscribe(cust => {if (cust) {
+      this.customer = cust;
+      this.detailForm.patchValue(cust);
+    }
+    });
 
+  }
+  save(): void {
+    if (!this.detailForm.valid) return;
+    const customer = { ...this.customer, ...this.detailForm.value };
+    this.customerService.update(customer);
+    alert('Customer updated!');
+  }
 }

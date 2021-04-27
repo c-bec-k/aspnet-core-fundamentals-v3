@@ -1,5 +1,40 @@
-<p>customer-detail works!</p>
+  <form [formGroup]="detailForm" novalidate>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" name="firstName">
+      <mat-error>First name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" name="lastName">
+      <mat-error>Last name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber" name="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email address</mat-label>
+      <input matInput #emailAddress formControlName="emailAddress" name="emailAddress">
+      <mat-error *ngIf="!emailAddress.value">Email address is required</mat-error>
+      <mat-error *ngIf="emailAddress.value && emailAddress.validity.valid">Invalid email address</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Preferred Contact Method</mat-label>
+      <select matNativeControl formControlName="preferredContactMethod" name="preferredContactMethod">
+        <option value="">Don't Contact Me!</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+      </select>
+    </mat-form-field>
+  </form>
 
-<pre>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button (click)="save()" color="accent">Save</button>
+</mat-dialog-actions>
+
+
+<!-- <pre>
   {{customer | json}}
-</pre>
+</pre> -->

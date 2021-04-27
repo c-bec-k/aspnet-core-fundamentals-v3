@@ -1,0 +1,20 @@
+form {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+form > * {
+  padding: 0.5em;
+  flex: 1 1 48%;
+}
+
+@media (min-width: 37.5em) {
+  form {
+    flex-direction: row;
+  }
+}
