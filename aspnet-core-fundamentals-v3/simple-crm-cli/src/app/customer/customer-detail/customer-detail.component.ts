@@ -19,7 +19,7 @@ export class CustomerDetailComponent implements OnInit {
     private fb: FormBuilder,
     private customerService: CustomerService,
     private route: ActivatedRoute,
-    // private snackBar: MatSnackBar
+    private snackBar: MatSnackBar
     ) {
       this.createForm();
      }
@@ -51,6 +51,6 @@ export class CustomerDetailComponent implements OnInit {
     if (!this.detailForm.valid) return;
     const customer = { ...this.customer, ...this.detailForm.value };
     this.customerService.update(customer);
-    alert('Customer updated!');
+    this.snackBar.open('Customer Saved', 'OK');
   }
 }
