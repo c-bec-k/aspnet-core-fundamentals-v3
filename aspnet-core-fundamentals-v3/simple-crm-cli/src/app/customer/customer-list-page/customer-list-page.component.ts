@@ -18,7 +18,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   customers$!: Observable<Customer[]>;
 
   dataSource!: MatTableDataSource<Customer>; // The ! tells Angular you know it may be used before it is set.  Try it without to see the error
-  displayColumns = ['name', 'phoneNumber', 'emailAddress', 'statusCode','edit'];
+  displayColumns = ['name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
 
 
 
@@ -48,6 +48,16 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
       width: '15rem',
       data: null
     });
+
+    dialogRef.afterClosed().subscribe((customer: Customer) =>
+    {
+      if (customer === undefined) {return;}
+      this.customerService.insert(customer).subscribe( e => {
+        this.customers$ = this.customerService.search('');
+      });
+    });
   }
+
+
 
 }
