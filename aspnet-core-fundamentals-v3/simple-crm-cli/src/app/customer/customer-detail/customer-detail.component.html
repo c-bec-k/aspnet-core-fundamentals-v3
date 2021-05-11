@@ -22,6 +22,14 @@
       <mat-error *ngIf="emailAddress.value && emailAddress.validity.valid">Invalid email address</mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Status</mat-label>
+      <select matNativeControl formControlName="statusCode" name="statusCode">
+        <option value="prospect">Prospect</option>
+        <option value="customer">Customer</option>
+        <option value="not_interested">Not Interested</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field>
       <mat-label>Preferred Contact Method</mat-label>
       <select matNativeControl formControlName="preferredContactMethod" name="preferredContactMethod">
         <option value="">Don't Contact Me!</option>
