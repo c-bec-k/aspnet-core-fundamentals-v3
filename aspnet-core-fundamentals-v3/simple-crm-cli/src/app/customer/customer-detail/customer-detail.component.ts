@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../customer.model';
 import { CustomerService } from '../customer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'crm-customer-detail',
@@ -31,7 +32,8 @@ export class CustomerDetailComponent implements OnInit {
         lastName: ['', Validators.required],
         phoneNumber: [''],
         emailAddress: ['', [Validators.required, Validators.email]],
-        preferredContactMethod: ['email']
+        preferredContactMethod: ['email'],
+        statusCode: ['']
        })
      }
 

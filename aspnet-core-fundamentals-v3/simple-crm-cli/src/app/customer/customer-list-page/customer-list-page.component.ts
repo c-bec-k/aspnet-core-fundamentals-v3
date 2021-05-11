@@ -18,7 +18,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   customers$!: Observable<Customer[]>;
 
   dataSource!: MatTableDataSource<Customer>; // The ! tells Angular you know it may be used before it is set.  Try it without to see the error
-  displayColumns = ['name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
+  displayColumns = ['icon', 'name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
 
 
 

@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { CustomerModule } from './customer/customer.module';
+import { AppIconsService } from './app-icons.service';
 
 
 
@@ -26,7 +27,9 @@ import { CustomerModule } from './customer/customer.module';
     MatSidenavModule,
     MatListModule,
   ],
-  providers: [],
+  providers: [AppIconsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(iconService: AppIconsService) {}
+ }

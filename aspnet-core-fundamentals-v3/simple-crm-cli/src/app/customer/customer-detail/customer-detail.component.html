@@ -24,6 +24,7 @@
     <mat-form-field>
       <mat-label>Status</mat-label>
       <select matNativeControl formControlName="statusCode" name="statusCode">
+        <option value="unknown">Unknown</option>
         <option value="prospect">Prospect</option>
         <option value="customer">Customer</option>
         <option value="not_interested">Not Interested</option>
@@ -37,6 +38,11 @@
         <option value="phone">Phone</option>
       </select>
     </mat-form-field>
+    <!-- <mat-form-field>
+      <input matNativeControl [matDatepicker]="lastContactDate" formControlName="lastContactDate" name="lastContactDate">
+      <mat-datepicker-toggle matSuffix [for]="lastContactDate"></mat-datepicker-toggle>
+      <mat-datepicker #lastContactDate></mat-datepicker>
+    </mat-form-field> -->
   </form>
 
 <mat-card-actions>
@@ -45,6 +51,6 @@
 </mat-card-actions>
 </mat-card>
 </div>
-<!-- <pre>
+<pre>
   {{customer | json}}
-</pre> -->
+</pre>
