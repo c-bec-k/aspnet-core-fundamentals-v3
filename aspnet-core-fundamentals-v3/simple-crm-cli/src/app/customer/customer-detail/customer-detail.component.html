@@ -38,11 +38,12 @@
         <option value="phone">Phone</option>
       </select>
     </mat-form-field>
-    <!-- <mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Contact Date</mat-label>
       <input matNativeControl [matDatepicker]="lastContactDate" formControlName="lastContactDate" name="lastContactDate">
       <mat-datepicker-toggle matSuffix [for]="lastContactDate"></mat-datepicker-toggle>
       <mat-datepicker #lastContactDate></mat-datepicker>
-    </mat-form-field> -->
+    </mat-form-field>
   </form>
 
 <mat-card-actions>
@@ -51,6 +52,6 @@
 </mat-card-actions>
 </mat-card>
 </div>
-<pre>
+<!-- <pre>
   {{customer | json}}
-</pre>
+</pre> -->

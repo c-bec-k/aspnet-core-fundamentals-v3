@@ -33,7 +33,8 @@ export class CustomerDetailComponent implements OnInit {
         phoneNumber: [''],
         emailAddress: ['', [Validators.required, Validators.email]],
         preferredContactMethod: ['email'],
-        statusCode: ['']
+        statusCode: [''],
+        lastContactDate: ['']
        })
      }
 
@@ -45,6 +46,9 @@ export class CustomerDetailComponent implements OnInit {
     this.customerId = parseInt(this.route.snapshot.params.id, 10)
     this.customerService.get(this.customerId).subscribe(cust => {if (cust) {
       this.customer = cust;
+      if (!this.customer.lastContactDate) {
+        this.customer.lastContactDate = new Date().toISOString();
+      }
       this.detailForm.patchValue(cust);
     }
     });
@@ -53,7 +57,9 @@ export class CustomerDetailComponent implements OnInit {
   save(): void {
     if (!this.detailForm.valid) return;
     const customer = { ...this.customer, ...this.detailForm.value };
-    this.customerService.update(customer);
-    this.snackBar.open('Customer Saved', 'OK');
+    this.customerService.update(customer).subscribe( () => {
+      this.snackBar.open('Customer Saved', 'OK');
+      this.router.navigate([`/customers/`]);
+    });
   }
 }

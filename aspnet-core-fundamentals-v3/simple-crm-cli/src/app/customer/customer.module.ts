@@ -19,6 +19,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { StatusIconPipe } from './status-icon.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -38,7 +41,9 @@ import { StatusIconPipe } from './status-icon.pipe';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
