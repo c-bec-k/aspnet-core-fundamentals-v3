@@ -4,17 +4,19 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'statusIcon'
 })
 export class StatusIconPipe implements PipeTransform {
-  transform(value: unknown, ...args: unknown[]): unknown {
-    if (value === 'prospect') {
+  transform(value: string, ...args: unknown[]): unknown {
+    switch(value.toLowerCase()){
+    case 'prospect':
       return 'maybe';
-    }
-    if (value === 'customer') {
+      break;
+     case 'customer':
       return 'yes';
-    }
-    if (value === 'not_interested') {
+      break;
+    case 'not_interested':
       return 'nope';
-    } else {
+      break;
+    default:
       return 'whoKnows';
-    }
   }
+}
 }
