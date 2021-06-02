@@ -56,6 +56,7 @@ namespace SimpleCrm.Web.Controllers
                 customer.Type = model.Type;
 
                 _customerData.Update(customer);
+                _customerData.Commit();
                 return RedirectToAction(nameof(Details), new { id = customer.Id });
             }
             return View();
@@ -90,6 +91,7 @@ namespace SimpleCrm.Web.Controllers
                     Type = model.Type
                 };
                 _customerData.Add(customer);
+                _customerData.Commit();
                 return RedirectToAction(nameof(Details), new { id = customer.Id });
             }
 
