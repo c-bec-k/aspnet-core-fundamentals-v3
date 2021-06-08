@@ -41,7 +41,15 @@ namespace SimpleCrm
         {
 
         }
-
+        
+        public List<Customer> GetByStatus(CustomerStatus status, int pageIndex, int take, string orderBy)
+        {
+            return null;
+        }
+        public void Delete(int customerId) 
+        {
+            
+        }
         public void Commit()
         {
 
