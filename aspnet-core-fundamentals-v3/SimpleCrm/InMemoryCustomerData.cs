@@ -46,7 +46,7 @@ namespace SimpleCrm
         {
             return null;
         }
-        public void Delete(int customerId) 
+        public void Delete(Customer item) 
         {
             
         }

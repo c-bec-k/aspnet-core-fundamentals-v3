@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace SimpleCrm.SqlDbServices
 {
@@ -36,5 +37,39 @@ namespace SimpleCrm.SqlDbServices
         {
             _context.SaveChanges();
         }
-    }
+
+      public List<Customer> GetByStatus(CustomerStatus status, int pageIndex, int take, string orderBy)
+      {
+        var allowedFields = new string[] { "firstname", "lastname", "emailaddress", "customerstatus" };
+
+        var sorts = orderBy.Split(",");
+        foreach (var sort in sorts) {
+          var field = sort.Trim().ToLower();
+          var parts = field.Split(" ");
+
+          if (parts.Length != 2) {
+            throw new System.Exception("invalid number of args");
+          }
+          if (parts[1] != "ASC" || parts[1] != "DESC") {
+            throw new System.Exception("Invalid sort function");
+          }
+
+          if (!allowedFields.Contains(field)) {
+            throw new System.Exception("Invalid sort fields");
+          }
+        }
+
+        var items = _context.Customers.Where( x => x.StatusCode == status )
+        .OrderBy(orderBy)
+        .Skip(pageIndex * take)
+        .Take(take);
+
+        return items.ToList();
+      }
+
+      public void Delete(Customer item)
+      {
+        _context.Remove(item);
+      }
+  }
 }

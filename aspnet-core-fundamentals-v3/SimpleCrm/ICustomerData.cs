@@ -9,7 +9,7 @@ namespace SimpleCrm
         void Add(Customer customer);
         List<Customer> GetByStatus(CustomerStatus status, int pageIndex, int take, string orderBy);
         void Update(Customer customer);
-        void Delete(int customerId);
+        void Delete(Customer item);
         void Commit();
     }
 
