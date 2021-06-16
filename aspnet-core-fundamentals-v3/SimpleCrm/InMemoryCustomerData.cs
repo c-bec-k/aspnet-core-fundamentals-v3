@@ -44,7 +44,7 @@ namespace SimpleCrm
         
         public List<Customer> GetByStatus(CustomerStatus status, int pageIndex, int take, string orderBy)
         {
-            return null;
+            return _customers.Skip(pageIndex * take).Take(take).ToList();
         }
         public void Delete(Customer item) 
         {
