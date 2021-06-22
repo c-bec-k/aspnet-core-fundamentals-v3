@@ -38,7 +38,7 @@ namespace SimpleCrm.SqlDbServices
             _context.SaveChanges();
         }
 
-      public List<Customer> GetByStatus(CustomerStatus status, int pageIndex, int take, string orderBy)
+      public List<Customer> GetAll(int pageIndex, int take, string orderBy)
       {
         var allowedFields = new string[] { "firstname", "lastname", "emailaddress", "customerstatus" };
 
@@ -59,7 +59,7 @@ namespace SimpleCrm.SqlDbServices
           }
         }
 
-        var items = _context.Customers.Where( x => x.StatusCode == status )
+        var items = _context.Customers
         .OrderBy(orderBy)
         .Skip(pageIndex * take)
         .Take(take);
