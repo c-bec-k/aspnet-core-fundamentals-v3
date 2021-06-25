@@ -19,16 +19,7 @@ namespace SimpleCrm.WebApi.ApiControllers
     public IActionResult GetAll()
     {
       var customers = _customerData.GetAll(0, 50, "");
-      var models = customers.Select( cust => new CustomerDisplayViewModel(cust)
-      {
-        CustomerId = cust.Id,
-        FirstName = cust.FirstName,
-        LastName = cust.LastName,
-        EmailAddress = cust.EmailAddress,
-        PhoneNumber = cust.PhoneNumber,
-        Status = Enum.GetName(typeof(CustomerStatus), cust.StatusCode),
-        PreferredContactMethod = Enum.GetName(typeof(InteractionMethod), cust.PeferredContactMethod)
-      });
+      var models = customers.Select( cust => new CustomerDisplayViewModel(cust));
       return Ok(customers);
     }
 
@@ -64,19 +55,26 @@ namespace SimpleCrm.WebApi.ApiControllers
       _customerData.Add(cust);
       _customerData.Commit();
 
-      return Ok();
+      return Ok(new CustomerDisplayViewModel(cust));
     }
 
     [HttpPut("{id}")] // PUT /api/customer/:id
-    public IActionResult Update(int id, [FromBody] Customer model)
+    public IActionResult Update(int id, [FromBody] CustomerDisplayViewModel model)
     {
       var cust = _customerData.Get(id);
       if (cust ==null) {
         return NotFound();
       }
+
+      cust.FirstName = model.FirstName;
+      cust.LastName = model.LastName;
+      cust.PhoneNumber = model.PhoneNumber;
+      cust.StatusCode = model.Status;
+      cust.LastContactDate = DateTimeOffset.UtcNow;
+
       _customerData.Update(cust);
       _customerData.Commit();
-      return Ok();
+      return Ok(new CustomerDisplayViewModel(cust));
     }
 
     [HttpDelete("{id}")] // DELETE /api/customer/:id

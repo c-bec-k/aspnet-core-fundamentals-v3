@@ -10,8 +10,8 @@ namespace SimpleCrm.WebApi.Models
       public string PhoneNumber { get; set; }
       public string EmailAddress { get; set; }
       public string PreferredContactMethod { get; set; }
-      public string Status { get; set; }
-      public string LastContactDate { get; set; }
+      public CustomerStatus Status { get; set; }
+      public DateTime LastContactDate { get; set; }
 
       public CustomerDisplayViewModel() { }
 
@@ -24,7 +24,7 @@ namespace SimpleCrm.WebApi.Models
         PhoneNumber = src.PhoneNumber;
         EmailAddress = src.EmailAddress;
         PreferredContactMethod = Enum.GetName(typeof(InteractionMethod), src.PeferredContactMethod);
-        Status = Enum.GetName(typeof(CustomerStatus), src.StatusCode);
+        Status = src.StatusCode;
       }
   }
 }
