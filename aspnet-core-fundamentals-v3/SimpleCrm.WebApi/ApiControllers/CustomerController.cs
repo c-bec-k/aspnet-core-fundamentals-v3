@@ -62,7 +62,7 @@ namespace SimpleCrm.WebApi.ApiControllers
     public IActionResult Update(int id, [FromBody] CustomerDisplayViewModel model)
     {
       var cust = _customerData.Get(id);
-      if (cust ==null) {
+      if (cust == null) {
         return NotFound();
       }
 
@@ -70,6 +70,7 @@ namespace SimpleCrm.WebApi.ApiControllers
       cust.LastName = model.LastName;
       cust.PhoneNumber = model.PhoneNumber;
       cust.StatusCode = model.Status;
+      cust.EmailAddress = model.EmailAddress;
       // cust.LastContactDate = DateTimeOffset.UtcNow;
 
       _customerData.Update(cust);

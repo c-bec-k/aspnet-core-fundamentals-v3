@@ -2,4 +2,18 @@
 
 ###
 
-GET http://localhost:5000/api/customer
+GET http://localhost:5000/api/customer/104
+
+
+###
+
+PUT http://localhost:5000/api/customer/104
+content-type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "phoneNumber": "555.99974",
+  "emailAddress": "j@doe.co.uk",
+  "status": 0
+}
