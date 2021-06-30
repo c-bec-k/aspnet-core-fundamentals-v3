@@ -70,7 +70,7 @@ namespace SimpleCrm.WebApi.ApiControllers
       cust.LastName = model.LastName;
       cust.PhoneNumber = model.PhoneNumber;
       cust.StatusCode = model.Status;
-      cust.LastContactDate = DateTimeOffset.UtcNow;
+      // cust.LastContactDate = DateTimeOffset.UtcNow;
 
       _customerData.Update(cust);
       _customerData.Commit();

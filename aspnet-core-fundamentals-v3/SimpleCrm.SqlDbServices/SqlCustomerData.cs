@@ -42,15 +42,15 @@ namespace SimpleCrm.SqlDbServices
       {
         var allowedFields = new string[] { "firstname", "lastname", "emailaddress", "customerstatus" };
 
-        var sorts = orderBy.Split(",");
+        var sorts = orderBy.Split(new[] {','}, System.StringSplitOptions.RemoveEmptyEntries);
         foreach (var sort in sorts) {
           var field = sort.Trim().ToLower();
           var parts = field.Split(" ");
 
-          if (parts.Length != 2) {
+          if (parts.Length > 2) {
             throw new System.Exception("invalid number of args");
           }
-          if (parts[1] != "ASC" || parts[1] != "DESC") {
+          if ( parts.Length > 1 && parts[1] != "ASC" && parts[1] != "DESC") {
             throw new System.Exception("Invalid sort function");
           }
 
@@ -58,7 +58,9 @@ namespace SimpleCrm.SqlDbServices
             throw new System.Exception("Invalid sort fields");
           }
         }
-
+        if (string.IsNullOrWhiteSpace(orderBy)) {
+          orderBy = "lastname asc";
+        }
         var items = _context.Customers
         .OrderBy(orderBy)
         .Skip(pageIndex * take)
