@@ -85,16 +85,23 @@ namespace SimpleCrm.WebApi.ApiControllers
         return NotFound();
       }
 
-      cust.FirstName = model.FirstName;
-      cust.LastName = model.LastName;
-      cust.PhoneNumber = model.PhoneNumber;
-      cust.StatusCode = model.Status;
-      cust.EmailAddress = model.EmailAddress;
-      // cust.LastContactDate = DateTimeOffset.UtcNow;
+      if (!ModelState.IsValid)
+      {
+        return UnprocessableEntity(ModelState);
+      }
 
-      _customerData.Update(cust);
+      var newCust = new Customer
+      {
+        FirstName = model.FirstName,
+        LastName = model.LastName,
+        PhoneNumber = model.PhoneNumber,
+        StatusCode = model.Status,
+        EmailAddress = model.EmailAddress
+      };
+
+      _customerData.Update(newCust);
       _customerData.Commit();
-      return Ok(new CustomerDisplayViewModel(cust));
+      return Ok(new CustomerDisplayViewModel(newCust));
     }
 
     [HttpDelete("{id}")] // DELETE /api/customer/:id
