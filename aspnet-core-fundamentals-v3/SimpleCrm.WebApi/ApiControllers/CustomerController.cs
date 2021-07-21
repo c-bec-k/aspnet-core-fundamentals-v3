@@ -13,9 +13,15 @@ namespace SimpleCrm.WebApi.ApiControllers
   {
     private readonly ICustomerData _customerData;
     private readonly LinkGenerator _linkGenerator;
-    private string GetCustomerResourceUri(int page, int take) {
+    private string GetCustomerResourceUri(CustomerListParameters listParameters, int pageAdjust) {
+      if (listParameters.Page + pageAdjust <= 0)
+      {
+        return null;
+      }
       return _linkGenerator.GetPathByName(this.HttpContext, "GetCustomers", values: new {
-        page, take
+        take = listParameters.Take,
+        page = listParameters.Page + pageAdjust,
+        orderBy = listParameters.OrderBy
       });
     }
 
@@ -25,22 +31,24 @@ namespace SimpleCrm.WebApi.ApiControllers
   }
 
     [HttpGet("", Name = "GetCustomers")] // GET /api/customer
-    public IActionResult GetAll([FromQuery]int page = 1, [FromQuery]int take = 50)
+    public IActionResult GetAll([FromQuery] CustomerListParameters listParameters)
     {
-      var customers = _customerData.GetAll(page - 1, take, "");
-      var models = customers.Select( cust => new CustomerDisplayViewModel(cust));
+      var customers = _customerData.GetAll(listParameters);
+      var models = customers.Select(cust => new CustomerDisplayViewModel(cust));
 
-      var pagination = new PaginationModel{
-        next = customers.Count < take ? null : GetCustomerResourceUri(page+1, take),
-        prev = page <= 1? null : GetCustomerResourceUri(page-1, take),
-        first = page == 1 ? null : GetCustomerResourceUri(1, take),
-        // last = customers.Count < take ? null : GetCustomerResourceUri((customers.Count / take) + (customers.Count % take > 1 ? 1 : 0), take) 
+      var pagination = new PaginationModel
+      {
+        next = customers.Count < listParameters.Take ? null : GetCustomerResourceUri(listParameters, 1),
+        prev = listParameters.Page <= 1 ? null : GetCustomerResourceUri(listParameters, -1),
+        //first = listParameters.Page == 1 ? null : GetCustomerResourceUri(listParameters, 0),
       };
 
       Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(pagination));
 
       return Ok(customers);
     }
+
+
 
     [HttpGet("{id}")] // GET /api/customer/:id
     public IActionResult Get(int id)

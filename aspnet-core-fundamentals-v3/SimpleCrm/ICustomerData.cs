@@ -2,15 +2,15 @@
 
 namespace SimpleCrm
 {
-    public interface ICustomerData
-    {
-        IEnumerable<Customer> GetAll();
-        Customer Get(int id);
-        void Add(Customer customer);
-        List<Customer> GetAll(int pageIndex, int take, string orderBy);
-        void Update(Customer customer);
-        void Delete(Customer item);
-        void Commit();
-    }
+  public interface ICustomerData
+  {
+    Customer Get(int id);
+    void Add(Customer customer);
+    List<Customer> GetAll(CustomerListParameters listParameters);
+    void Update(Customer customer);
+    void Delete(Customer item);
+    void Commit();
+    IEnumerable<Customer> GetAll();
+  }
 
 }

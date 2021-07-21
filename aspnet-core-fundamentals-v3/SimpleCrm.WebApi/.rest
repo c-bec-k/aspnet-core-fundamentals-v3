@@ -2,8 +2,7 @@
 
 ###
 
-GET http://localhost:5000/api/customer/104
-
+GET https://localhost:5001/api/customer?Page=3&Take=20
 
 ###
 

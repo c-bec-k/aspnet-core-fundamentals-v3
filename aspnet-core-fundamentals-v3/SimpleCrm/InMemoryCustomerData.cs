@@ -42,9 +42,9 @@ namespace SimpleCrm
 
         }
         
-        public List<Customer> GetAll(int pageIndex, int take, string orderBy)
+        public List<Customer> GetAll(CustomerListParameters listParameters)
         {
-            return _customers.Skip(pageIndex * take).Take(take).ToList();
+            return _customers.Skip(listParameters.Page * listParameters.Take).Take(listParameters.Take).ToList();
         }
         public void Delete(Customer item) 
         {
