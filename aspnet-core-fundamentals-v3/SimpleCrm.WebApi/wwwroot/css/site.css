@@ -69,3 +69,40 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom CSS
+-------------------------------------------------- */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45vh;
+  background-image: url("https://picsum.photos/1200/675");
+  background-size: cover;
+}
+
+.hero > h1 {
+  text-align: center;
+  width: 100%;
+  background-color: rgba(255,255,255,0.6);
+}
+
+.features > img {
+    float: left;
+    margin-inline-end: 0.5em;
+}
+
+.features + button {
+  border: solid var(--success) 2px;
+  background-color: var(--success);
+  color: black;
+  text-transform: capitalize;
+  border-radius: 4px;
+}
+
+footer {
+  color: white;
+  background-color: var(--gray-dark);
+}
