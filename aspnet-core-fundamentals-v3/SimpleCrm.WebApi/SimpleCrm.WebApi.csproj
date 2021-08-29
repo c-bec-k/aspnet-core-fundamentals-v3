@@ -12,6 +12,9 @@
   <ItemGroup>
     <None Remove="Microsoft.AspNetCore.SpaServices" />
     <None Remove="Microsoft.AspNetCore.SpaServices.Extensions" />
+    <None Remove="Microsoft.AspNetCore.Authentication.Google" />
+    <None Remove="Auth\" />
+    <None Remove="Microsoft.AspNetCore.Authentication.MicrosoftAccount" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -32,10 +35,13 @@
 </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.17" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.18" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ApiControllers\" />
+    <Folder Include="Auth\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

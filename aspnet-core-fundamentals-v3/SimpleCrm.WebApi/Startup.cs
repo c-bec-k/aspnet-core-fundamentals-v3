@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleCrm.SqlDbServices;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Authentication.Google;
+using SimpleCrm.WebApi.Auth;
 
 namespace SimpleCrm.WebApi
 {
@@ -42,6 +44,36 @@ namespace SimpleCrm.WebApi
                 var cs = Configuration.GetConnectionString("SimpleCrmConnection");
                 options.UseNpgsql(cs);
             });
+
+            var googleOptions = Configuration.GetSection(nameof(GoogleAuthSettings));
+            services.Configure<GoogleAuthSettings>(options =>
+            {
+              options.ClientId = googleOptions[nameof(GoogleAuthSettings.ClientId)];
+              options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
+            });
+
+            services.AddAuthentication()
+              .AddCookie(cfg => cfg.SlidingExpiration = true)
+              .AddGoogle(options =>
+            {
+              options.ClientId = googleOptions[nameof(GoogleAuthSettings.ClientId)];
+              options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
+            });
+
+            var msOptions = Configuration.GetSection(nameof(MSAuthSettings));
+            services.Configure<MSAuthSettings>(options =>
+            {
+              options.ClientId = msOptions[nameof(MSAuthSettings.ClientId)];
+              options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
+            });
+
+            services.AddAuthentication()
+              .AddMicrosoftAccount(options =>
+              {
+                options.ClientId = msOptions[nameof(MSAuthSettings.ClientId)];
+                options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
+              });
+       
 
             services.AddDefaultIdentity<CrmUser>()
                 .AddDefaultUI()
