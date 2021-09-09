@@ -15,6 +15,9 @@ using SimpleCrm.SqlDbServices;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.AspNetCore.Authentication.Google;
 using SimpleCrm.WebApi.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SimpleCrm.WebApi
 {
@@ -27,13 +30,25 @@ namespace SimpleCrm.WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+    // JWT Auth stuff
+    private const string secretKey = "5f4a3ec3f9e8c539d33a92fb";
+    private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SimpleCrmDbContext>(options => {
                 var cs = Configuration.GetConnectionString("SimpleCrmConnection");
                 options.UseNpgsql(cs);
             });
+
+      var jwtOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+      services.Configure<JwtIssuerOptions>(options =>
+      {
+        options.Issuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)];
+        options.Audience = jwtOptions[nameof(JwtIssuerOptions.Audience)];
+        options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+      });
 
             services.AddSpaStaticFiles(config =>
             {
@@ -52,13 +67,6 @@ namespace SimpleCrm.WebApi
               options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
             });
 
-            services.AddAuthentication()
-              .AddCookie(cfg => cfg.SlidingExpiration = true)
-              .AddGoogle(options =>
-            {
-              options.ClientId = googleOptions[nameof(GoogleAuthSettings.ClientId)];
-              options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
-            });
 
             var msOptions = Configuration.GetSection(nameof(MSAuthSettings));
             services.Configure<MSAuthSettings>(options =>
@@ -67,13 +75,15 @@ namespace SimpleCrm.WebApi
               options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
             });
 
-            services.AddAuthentication()
-              .AddMicrosoftAccount(options =>
-              {
-                options.ClientId = msOptions[nameof(MSAuthSettings.ClientId)];
-                options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
-              });
-       
+      services.AddAuthentication(options =>
+      {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      }).AddJwtBearer( configureOptions =>
+      {
+        // TODO
+      });
+
 
             services.AddDefaultIdentity<CrmUser>()
                 .AddDefaultUI()
