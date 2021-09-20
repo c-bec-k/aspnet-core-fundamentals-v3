@@ -30,11 +30,11 @@ namespace SimpleCrm.WebApi
 
         public IConfiguration Configuration { get; }
 
-    // JWT Auth stuff
+    /// JWT Auth stuff
     private const string secretKey = "5f4a3ec3f9e8c539d33a92fb";
     private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-    // This method gets called by the runtime. Use this method to add services to the container.
+    /// This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SimpleCrmDbContext>(options => {
@@ -48,9 +48,46 @@ namespace SimpleCrm.WebApi
         options.Issuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)];
         options.Audience = jwtOptions[nameof(JwtIssuerOptions.Audience)];
         options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+        options.ValidFor = int.TryParse(jwtOptions[nameof(JwtIssuerOptions.ValidFor)], out var mins) ? mins : 120;
       });
 
-            services.AddSpaStaticFiles(config =>
+
+      var TokenValidationPrms = new TokenValidationParameters
+      {
+        ValidateIssuer = true,
+        ValidIssuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)],
+        ValidateAudience = true,
+        ValidAudience = jwtOptions[nameof(JwtIssuerOptions.Audience)],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = _signingKey,
+        RequireExpirationTime = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+      };
+
+      services.AddAuthorization(options =>
+      {
+        options.AddPolicy("ApiUser", policy => policy.RequireClaim(
+          Constants.JwtClaimIdentifiers.Rol,
+          Constants.JwtClaims.ApiAccess
+          ));
+      });
+
+      var identityBuilder = services.AddIdentityCore<CrmIdentityUser>(o =>{
+
+      });
+
+      identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(IdentityRole), identityBuilder.Services);
+      identityBuilder.AddEntityFrameworkStores<CrmIdentityDbContext>();
+      identityBuilder.AddRoleValidator<RoleValidator<IdentityRole>>();
+      identityBuilder.AddRoleManager<RoleManager<IdentityRole>>();
+      identityBuilder.AddSignInManager<SignInManager<CrmIdentityUser>>();
+      identityBuilder.AddDefaultTokenProviders();
+
+      services.AddSingleton<IJwtFactory, JwtFactory>();
+
+
+      services.AddSpaStaticFiles(config =>
             {
               config.RootPath = Configuration["SpaRoot"];
             });
@@ -76,12 +113,14 @@ namespace SimpleCrm.WebApi
             });
 
       services.AddAuthentication(options =>
-      {
+      { //tells ASP.Net Identity the application is using JWT
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
       }).AddJwtBearer( configureOptions =>
-      {
-        // TODO
+      { //tells ASP.Net to look for Bearer authentication with these options
+        configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)];
+        configureOptions.TokenValidationParameters = TokenValidationPrms;
+        configureOptions.SaveToken = true; // allows token access in controller
       });
 
 
