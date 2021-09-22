@@ -5,7 +5,7 @@ using SimpleCrm.WebApi.Models;
 
 namespace SimpleCrm.WebApi.ApiControllers
 {
-  public class AuthController
+  public class AuthController : Controller
   {
     [HttpPost("login")]
     public async Task<IActionResult> Post([FromBody] CredentialsViewModel credentials)
@@ -24,8 +24,9 @@ namespace SimpleCrm.WebApi.ApiControllers
 
       // TODO: add GetUserData method (see lesson below)
       var userModel = await GetUserData(user);
+
+      // returns a UserSummaryViewModel containing a JWT and other user info
+      return Ok(userModel);
     }
-    // returns a UserSummaryViewModel containing a JWT and other user info
-    return Ok(userModel);
   }
 }
