@@ -73,15 +73,15 @@ namespace SimpleCrm.WebApi
           ));
       });
 
-      var identityBuilder = services.AddIdentityCore<CrmIdentityUser>(o =>{
-
+      var identityBuilder = services.AddIdentityCore<CrmUser>(o =>{
+        
       });
 
       identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(IdentityRole), identityBuilder.Services);
       identityBuilder.AddEntityFrameworkStores<CrmIdentityDbContext>();
       identityBuilder.AddRoleValidator<RoleValidator<IdentityRole>>();
       identityBuilder.AddRoleManager<RoleManager<IdentityRole>>();
-      identityBuilder.AddSignInManager<SignInManager<CrmIdentityUser>>();
+      identityBuilder.AddSignInManager<SignInManager<CrmUser>>();
       identityBuilder.AddDefaultTokenProviders();
 
       services.AddSingleton<IJwtFactory, JwtFactory>();
