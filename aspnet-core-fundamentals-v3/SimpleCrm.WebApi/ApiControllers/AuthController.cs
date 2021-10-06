@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SimpleCrm.WebApi.Auth;
 using SimpleCrm.WebApi.Models;
+using System.Linq;
 
 namespace SimpleCrm.WebApi.ApiControllers
 {
@@ -26,7 +27,6 @@ namespace SimpleCrm.WebApi.ApiControllers
         return UnprocessableEntity(ModelState);
       }
 
-      // TODO: add Authenticate method
       var user = await Authenticate(credentials.EmailAddress, credentials.Password);
       if (user == null)
       {
@@ -79,9 +79,12 @@ namespace SimpleCrm.WebApi.ApiControllers
       {
         Id = user.Id,
         Name = user.UserName,
-        emailAddress = user.Email
+        EmailAddress = user.Email,
+        Jwt = jwt,
+        Roles = roles.ToArray()
       };
-    }
 
+      return userModel;
+    }
   }
 }
