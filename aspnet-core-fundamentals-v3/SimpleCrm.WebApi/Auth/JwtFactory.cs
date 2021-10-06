@@ -24,11 +24,25 @@ namespace SimpleCrm.WebApi.Auth
         new Claim(JwtRegisteredClaimNames.Sub, userName),
         new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
         new Claim(JwtRegisteredClaimNames.Iat,
-          ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(),
+          toUnixEpochDate(_jwtOptions.IssuedAt).ToString(),
           ClaimValueTypes.Integer64),
        identity.FindFirst(Constants.JwtClaimIdentifiers.Rol),
        identity.FindFirst(Constants.JwtClaimIdentifiers.Id)
       };
+
+      var jwt = new JwtSecurityToken(
+        issuer: _jwtOptions.Issuer,
+        audience: _jwtOptions.Audience,
+        claims: claims,
+        notBefore: DateTime.UtcNow,
+        expires: _jwtOptions.ExpirationTime,
+        signingCredentials: _jwtOptions.SigningCredentials);
+
+      var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+      return encodedJwt;
+
+      
     }
 
 

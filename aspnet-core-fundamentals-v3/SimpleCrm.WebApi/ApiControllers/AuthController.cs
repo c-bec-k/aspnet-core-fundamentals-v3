@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace SimpleCrm.WebApi.ApiControllers
 {
+  [Route("auth")]
   public class AuthController : Controller
   {
     private readonly UserManager<CrmUser> _userManager;

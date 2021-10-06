@@ -92,25 +92,25 @@ namespace SimpleCrm.WebApi
               config.RootPath = Configuration["SpaRoot"];
             });
 
-            services.AddDbContext<CrmIdentityDbContext>(options =>{
-                var cs = Configuration.GetConnectionString("SimpleCrmConnection");
-                options.UseNpgsql(cs);
-            });
+      services.AddDbContext<CrmIdentityDbContext>(options =>{
+          var cs = Configuration.GetConnectionString("SimpleCrmConnection");
+          options.UseNpgsql(cs);
+      });
 
-            var googleOptions = Configuration.GetSection(nameof(GoogleAuthSettings));
-            services.Configure<GoogleAuthSettings>(options =>
-            {
-              options.ClientId = googleOptions[nameof(GoogleAuthSettings.ClientId)];
-              options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
-            });
+      var googleOptions = Configuration.GetSection(nameof(GoogleAuthSettings));
+      services.Configure<GoogleAuthSettings>(options =>
+      {
+        options.ClientId = googleOptions[nameof(GoogleAuthSettings.ClientId)];
+        options.ClientSecret = googleOptions[nameof(GoogleAuthSettings.ClientSecret)];
+      });
 
 
-            var msOptions = Configuration.GetSection(nameof(MSAuthSettings));
-            services.Configure<MSAuthSettings>(options =>
-            {
-              options.ClientId = msOptions[nameof(MSAuthSettings.ClientId)];
-              options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
-            });
+      var msOptions = Configuration.GetSection(nameof(MSAuthSettings));
+      services.Configure<MSAuthSettings>(options =>
+      {
+        options.ClientId = msOptions[nameof(MSAuthSettings.ClientId)];
+        options.ClientSecret = msOptions[nameof(MSAuthSettings.ClientSecret)];
+      });
 
       services.AddAuthentication(options =>
       { //tells ASP.Net Identity the application is using JWT
