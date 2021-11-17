@@ -2,7 +2,17 @@
 
 ###
 
-GET https://localhost:5001/api/customer?Page=3&Take=20
+POST https://localhost:5001/auth/login
+Content-Type: application/json
+
+{
+  "emailAddress": "hello@me.me",
+  "password": "Test1234!"
+}
+
+###
+
+GET http://localhost:5000/api/customer
 
 ###
 

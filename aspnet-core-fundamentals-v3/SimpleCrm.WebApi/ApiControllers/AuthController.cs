@@ -12,13 +12,17 @@ namespace SimpleCrm.WebApi.ApiControllers
   public class AuthController : Controller
   {
     private readonly UserManager<CrmUser> _userManager;
-    private readonly JwtFactory _jwtFactory;
+    private readonly IJwtFactory _jwtFactory;
 
-    public AuthController(UserManager<CrmUser> userManager, JwtFactory jwtFactory)
+    public AuthController(UserManager<CrmUser> userManager, IJwtFactory jwtFactory)
     {
       this._userManager = userManager;
       this._jwtFactory = jwtFactory;
     }
+
+    //[HttpPost("external/microsoft")]
+    //public async Task<IActionResult> PostMicrosoft([FromBody] MicrosoftAuthViewModel model);
+
 
     [HttpPost("login")]
     public async Task<IActionResult> Post([FromBody] CredentialsViewModel credentials)
@@ -34,10 +38,10 @@ namespace SimpleCrm.WebApi.ApiControllers
         return UnprocessableEntity("Invalid username or password");
       }
 
-      // TODO: add GetUserData method
+      
       var userModel = await GetUserData(user);
 
-      // returns a UserSummaryViewModel containing a JWT and other user info
+      
       return Ok(userModel);
     }
 
@@ -51,6 +55,7 @@ namespace SimpleCrm.WebApi.ApiControllers
       var currentUser = await _userManager.FindByEmailAsync(emailAddress);
       if (currentUser == null)
       {
+        // random number of ms to deter timing attacks
         var rand = new Random(DateTime.Now.Second).Next(2, 38);
         await Task.Delay(rand);
         return null;
