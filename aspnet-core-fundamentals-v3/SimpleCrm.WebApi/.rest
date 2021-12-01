@@ -2,12 +2,24 @@
 
 ###
 
-POST https://localhost:5001/auth/login
+POST localhost:5001/auth/login
 Content-Type: application/json
 
 {
   "emailAddress": "hello@me.me",
   "password": "Test1234!"
+}
+
+###
+
+POST localhost:5001/auth/register
+Content-Type: application/json
+
+{
+  "emailAddress": "hello123@me.me",
+  "password": "Test1234!",
+  "displayName": "John Doe",
+  "confirmPassword": "Test1234!"
 }
 
 ###

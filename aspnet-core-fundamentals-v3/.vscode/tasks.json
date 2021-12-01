@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/SimpleCrm.Web/SimpleCrm.Web.csproj",
+        "${workspaceFolder}/SimpleCrm.WebApi/SimpleCrm.WebApi.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],

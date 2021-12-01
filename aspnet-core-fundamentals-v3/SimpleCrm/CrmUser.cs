@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
@@ -9,6 +10,5 @@ namespace SimpleCrm
 
     [MaxLength(256)]
     public string DisplayName { get; set; }
-    
   }
 }
