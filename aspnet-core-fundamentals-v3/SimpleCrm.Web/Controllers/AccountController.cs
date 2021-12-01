@@ -42,7 +42,7 @@ namespace SimpleCrm.Web.Controllers
         {
           ModelState.AddModelError("", "Invalid email and/or password");
         }
-      } 
+      }
 
 
       return View();
@@ -59,7 +59,7 @@ namespace SimpleCrm.Web.Controllers
     {
       if (ModelState.IsValid)
       {
-          var user = new CrmUser
+        var user = new CrmUser
         {
           UserName = model.UserName,
           DisplayName = model.DisplayName,

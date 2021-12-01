@@ -6,7 +6,7 @@ namespace SimpleCrm.WebApi.Auth
 {
   public class JwtIssuerOptions
   {
-    public DateTime IssuedAt { get; set; }
+    public DateTime IssuedAt { get; set; } = DateTime.UtcNow;
     public string Issuer { get; set; }
     public string Audience { get; set; }
     public SigningCredentials SigningCredentials { get; set; }

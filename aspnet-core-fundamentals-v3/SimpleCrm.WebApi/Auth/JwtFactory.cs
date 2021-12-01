@@ -42,7 +42,7 @@ namespace SimpleCrm.WebApi.Auth
 
       return encodedJwt;
 
-      
+
     }
 
 
@@ -57,11 +57,14 @@ namespace SimpleCrm.WebApi.Auth
     }
 
     private static long toUnixEpochDate(DateTime date) =>
-      (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970,1,1,0,0,0, TimeSpan.Zero)).TotalSeconds);
+      (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
     private static void ThrowIfInvalidOptions(JwtIssuerOptions jwtOptions)
     {
-      throw new NotImplementedException();
+      if ( jwtOptions == null || jwtOptions.ValidFor <= 0 || jwtOptions.JtiGenerator == null || jwtOptions.SigningCredentials == null)
+      {
+        throw new ArgumentException("Invalid JWT options");
+      }
     }
   }
 }
