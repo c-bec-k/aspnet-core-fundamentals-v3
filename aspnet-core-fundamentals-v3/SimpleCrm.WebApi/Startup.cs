@@ -37,6 +37,7 @@ namespace SimpleCrm.WebApi
     /// This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddSwaggerDocument();
       services.AddDbContext<SimpleCrmDbContext>(options =>
       {
         var cs = Configuration.GetConnectionString("SimpleCrmConnection");
@@ -121,10 +122,10 @@ namespace SimpleCrm.WebApi
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
       }).AddJwtBearer(configureOptions =>
      { //tells ASP.Net to look for Bearer authentication with these options
-        configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)];
+       configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtIssuerOptions.Issuer)];
        configureOptions.TokenValidationParameters = TokenValidationPrms;
        configureOptions.SaveToken = true; // allows token access in controller
-      });
+     });
 
 
       services.AddDefaultIdentity<CrmUser>()
@@ -155,6 +156,10 @@ namespace SimpleCrm.WebApi
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
 
+      app.UseOpenApi();
+      app.UseSwaggerUi3();
+
+
       app.UseRouting();
 
       app.UseAuthentication();
@@ -176,7 +181,7 @@ namespace SimpleCrm.WebApi
             {
               spa.Options.SourcePath = "../simple-crm-cli";
               spa.Options.StartupTimeout = new TimeSpan(0, 0, 300); //300 seconds
-                    spa.UseAngularCliServer(npmScript: "start");
+              spa.UseAngularCliServer(npmScript: "start");
             }
           }));
     }
