@@ -18,6 +18,9 @@ using SimpleCrm.WebApi.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using NSwag.Generation.Processors.Security;
+using NSwag;
+using NSwag.AspNetCore;
 
 namespace SimpleCrm.WebApi
 {
@@ -37,7 +40,6 @@ namespace SimpleCrm.WebApi
     /// This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddSwaggerDocument();
       services.AddDbContext<SimpleCrmDbContext>(options =>
       {
         var cs = Configuration.GetConnectionString("SimpleCrmConnection");
@@ -127,6 +129,24 @@ namespace SimpleCrm.WebApi
        configureOptions.SaveToken = true; // allows token access in controller
      });
 
+      services.AddOpenApiDocument(options =>
+      {
+        options.DocumentName = "v1";
+        options.Title = "SimpleCRM";
+        options.Version = "1.0";
+        options.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT token", new List<string>(),
+        new OpenApiSecurityScheme
+        {
+          In = OpenApiSecurityApiKeyLocation.Header,
+          Name = "Authorization",
+          Type = OpenApiSecuritySchemeType.ApiKey,
+          Description = "Type into the textbox: `Bearer {your_JWT_token}`. You can get a JWT from endpoints: '/auth/register' or '/auth/login'"
+
+
+        }));
+        options.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT token"));
+      });
+
 
       services.AddDefaultIdentity<CrmUser>()
           .AddDefaultUI()
@@ -157,7 +177,17 @@ namespace SimpleCrm.WebApi
       app.UseSpaStaticFiles();
 
       app.UseOpenApi();
-      app.UseSwaggerUi3();
+      app.UseSwaggerUi3(settings =>
+            {
+                var microsoftOptions = Configuration.GetSection(nameof(MSAuthSettings));
+                settings.OAuth2Client = new OAuth2ClientSettings
+                {
+                    ClientId = microsoftOptions[nameof(MSAuthSettings.ClientId)],
+                    ClientSecret = microsoftOptions[nameof(MSAuthSettings.ClientSecret)],
+                    AppName = "Simple CRM",
+                    Realm = "Nexul Academy"
+                };
+            });
 
 
       app.UseRouting();
