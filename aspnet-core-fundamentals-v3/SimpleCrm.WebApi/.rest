@@ -24,7 +24,9 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/api/customer
+GET http://localhost:5000/api/customer/42
+accept: application/octet-stream
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwianRpIjoiODBiNDU5MGQtZTNhMi00NWMwLWFhNWYtNzlkMjE2NDIzODA5IiwiaWF0IjoxNjQxMzQ3MjI3LCJyb2wiOiJhcGlfYWNjZXNzIiwiaWQiOiIyZWFkNjFiYS1hYmYyLTRjZDItYTFmZi1iYTBjNGIwMTVlMDIiLCJuYmYiOjE2NDEzNDcyMjgsImV4cCI6MTY0MTM1NDQyNywiaXNzIjoiU2ltcGxlQ3JtLmNvbSIsImF1ZCI6IlNpbXBsZUNybS5jb20ifQ.K_yo_KhIy96HYdotAK_iyA8B5cItWV5RJ8WvUFPkWxM
 
 ###
 

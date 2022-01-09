@@ -156,6 +156,7 @@ namespace SimpleCrm.WebApi
       services.AddRazorPages();
 
       services.AddScoped<ICustomerData, SqlCustomerData>();
+      services.AddResponseCaching();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -175,6 +176,7 @@ namespace SimpleCrm.WebApi
       app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
+      app.UseResponseCaching();
 
       app.UseOpenApi();
       app.UseSwaggerUi3(settings =>

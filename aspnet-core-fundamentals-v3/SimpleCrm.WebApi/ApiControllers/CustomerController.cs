@@ -8,29 +8,32 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SimpleCrm.WebApi.ApiControllers
 {
-  
+
   [Route("api/customer")]
   [Authorize(Policy = "ApiUser")]
   public class CustomerController : Controller
   {
     private readonly ICustomerData _customerData;
     private readonly LinkGenerator _linkGenerator;
-    private string GetCustomerResourceUri(CustomerListParameters listParameters, int pageAdjust) {
+    private string GetCustomerResourceUri(CustomerListParameters listParameters, int pageAdjust)
+    {
       if (listParameters.Page + pageAdjust <= 0)
       {
         return null;
       }
-      return _linkGenerator.GetPathByName(this.HttpContext, "GetCustomers", values: new {
+      return _linkGenerator.GetPathByName(this.HttpContext, "GetCustomers", values: new
+      {
         take = listParameters.Take,
         page = listParameters.Page + pageAdjust,
         orderBy = listParameters.OrderBy
       });
     }
 
-  public CustomerController(ICustomerData customerData, LinkGenerator linkGenerator) {
-    _customerData = customerData;
-    _linkGenerator = linkGenerator;
-  }
+    public CustomerController(ICustomerData customerData, LinkGenerator linkGenerator)
+    {
+      _customerData = customerData;
+      _linkGenerator = linkGenerator;
+    }
 
     // [AllowAnonymous]
     [HttpGet("", Name = "GetCustomers")] // GET /api/customer
@@ -54,10 +57,12 @@ namespace SimpleCrm.WebApi.ApiControllers
 
 
     [HttpGet("{id}")] // GET /api/customer/:id
+    [ResponseCache(Duration = 60 * 60 * 24 * 2, Location = ResponseCacheLocation.Client)]
     public IActionResult Get(int id)
     {
       var cust = _customerData.Get(id);
-      if (cust == null) {
+      if (cust == null)
+      {
         return NotFound();
       }
       var model = new CustomerDisplayViewModel(cust);
@@ -67,21 +72,24 @@ namespace SimpleCrm.WebApi.ApiControllers
     [HttpPost("")] // POST /api/customer
     public IActionResult Create([FromBody] CustomerCreateViewModel model)
     {
-      if (model == null) {
+      if (model == null)
+      {
         return BadRequest();
       }
-      if (!ModelState.IsValid) {
+      if (!ModelState.IsValid)
+      {
         return UnprocessableEntity(ModelState);
       }
 
-      var cust = new Customer {
+      var cust = new Customer
+      {
         FirstName = model.FirstName,
         LastName = model.LastName,
         EmailAddress = model.EmailAddress,
         PhoneNumber = model.PhoneNumber,
         PeferredContactMethod = model.PreferredContactMethod
       };
-      
+
       _customerData.Add(cust);
       _customerData.Commit();
 
@@ -92,7 +100,8 @@ namespace SimpleCrm.WebApi.ApiControllers
     public IActionResult Update(int id, [FromBody] CustomerDisplayViewModel model)
     {
       var cust = _customerData.Get(id);
-      if (cust == null) {
+      if (cust == null)
+      {
         return NotFound();
       }
 
@@ -120,7 +129,8 @@ namespace SimpleCrm.WebApi.ApiControllers
     {
       var cust = _customerData.Get(id);
 
-      if (cust == null) {
+      if (cust == null)
+      {
         return NotFound();
       }
 
