@@ -21,6 +21,9 @@ using System.Text;
 using NSwag.Generation.Processors.Security;
 using NSwag;
 using NSwag.AspNetCore;
+using SimpleCrm;
+using System.Text.Json.Serialization;
+
 
 namespace SimpleCrm.WebApi
 {
@@ -152,7 +155,10 @@ namespace SimpleCrm.WebApi
           .AddDefaultUI()
           .AddEntityFrameworkStores<CrmIdentityDbContext>();
 
-      services.AddControllersWithViews();
+      services.AddControllersWithViews()
+              .AddJsonOptions(opts =>{
+                opts.JsonSerializerOptions.Converters.Add( new JsonStringEnumConverter());
+              });
       services.AddRazorPages();
 
       services.AddScoped<ICustomerData, SqlCustomerData>();
