@@ -66,6 +66,7 @@ namespace SimpleCrm.WebApi.ApiControllers
         return NotFound();
       }
       var model = new CustomerDisplayViewModel(cust);
+      Response.Headers.Add("ETag", cust.LastUpdated.ToString());
       return Ok(model);
     }
 
@@ -87,7 +88,8 @@ namespace SimpleCrm.WebApi.ApiControllers
         LastName = model.LastName,
         EmailAddress = model.EmailAddress,
         PhoneNumber = model.PhoneNumber,
-        PeferredContactMethod = model.PreferredContactMethod
+        PeferredContactMethod = model.PreferredContactMethod,
+        LastUpdated = DateTimeOffset.UtcNow
       };
 
       _customerData.Add(cust);
@@ -110,18 +112,22 @@ namespace SimpleCrm.WebApi.ApiControllers
         return UnprocessableEntity(ModelState);
       }
 
-      var newCust = new Customer
+      string ifMatch = Request.Headers["If-Match"];
+      if (ifMatch != cust.LastUpdated.ToString())
       {
-        FirstName = model.FirstName,
-        LastName = model.LastName,
-        PhoneNumber = model.PhoneNumber,
-        StatusCode = model.Status,
-        EmailAddress = model.EmailAddress
-      };
+        return Conflict("ETag mis-match. Please try again.");
+      }
 
-      _customerData.Update(newCust);
+        cust.FirstName = model.FirstName;
+        cust.LastName = model.LastName;
+        cust.PhoneNumber = model.PhoneNumber;
+        cust.StatusCode = model.Status;
+        cust.EmailAddress = model.EmailAddress;
+        cust.LastUpdated = DateTimeOffset.UtcNow;
+
+      _customerData.Update(cust);
       _customerData.Commit();
-      return Ok(new CustomerDisplayViewModel(newCust));
+      return Ok(new CustomerDisplayViewModel(cust));
     }
 
     [HttpDelete("{id}")] // DELETE /api/customer/:id

@@ -11,7 +11,7 @@ namespace SimpleCrm.WebApi.Models
       public string EmailAddress { get; set; }
       public string PreferredContactMethod { get; set; }
       public CustomerStatus Status { get; set; }
-      public DateTime LastContactDate { get; set; }
+      public DateTimeOffset LastUpdated { get; set; }
 
       public CustomerDisplayViewModel() { }
 
@@ -25,6 +25,7 @@ namespace SimpleCrm.WebApi.Models
         EmailAddress = src.EmailAddress;
         PreferredContactMethod = Enum.GetName(typeof(InteractionMethod), src.PeferredContactMethod);
         Status = src.StatusCode;
+        LastUpdated = src.LastUpdated;
       }
   }
 }

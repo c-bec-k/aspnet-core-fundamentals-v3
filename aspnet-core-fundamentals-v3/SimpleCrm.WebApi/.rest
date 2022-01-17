@@ -26,17 +26,21 @@ Content-Type: application/json
 
 GET http://localhost:5000/api/customer/42
 accept: application/octet-stream
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwianRpIjoiODBiNDU5MGQtZTNhMi00NWMwLWFhNWYtNzlkMjE2NDIzODA5IiwiaWF0IjoxNjQxMzQ3MjI3LCJyb2wiOiJhcGlfYWNjZXNzIiwiaWQiOiIyZWFkNjFiYS1hYmYyLTRjZDItYTFmZi1iYTBjNGIwMTVlMDIiLCJuYmYiOjE2NDEzNDcyMjgsImV4cCI6MTY0MTM1NDQyNywiaXNzIjoiU2ltcGxlQ3JtLmNvbSIsImF1ZCI6IlNpbXBsZUNybS5jb20ifQ.K_yo_KhIy96HYdotAK_iyA8B5cItWV5RJ8WvUFPkWxM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJoZWxsb0BtZS5tZSIsImp0aSI6ImFkYThjNWZkLTQ0N2ItNDUzOC1iYjdlLWZjNjg4NGY2ZmNjOSIsImlhdCI6MTY0MjQzMTUxNywicm9sIjoiYXBpX2FjY2VzcyIsImlkIjoiNzRkYzMyMzYtZmQ1MS00NjU4LTgyN2QtMmIyMjQ1MDI4YjBjIiwibmJmIjoxNjQyNDMxNTE3LCJleHAiOjE2NDI0Mzg3MTYsImlzcyI6IlNpbXBsZUNybS5jb20iLCJhdWQiOiJTaW1wbGVDcm0uY29tIn0._tO4VlPx8A_H1egQ0nlEW7yCXe0qUYdYP-p-2adkR3k
 
 ###
 
-PUT http://localhost:5000/api/customer/104
+PUT http://localhost:5000/api/customer/42
+If-Match: 1/17/2022 4:42:10 PM +00:00
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJoZWxsb0BtZS5tZSIsImp0aSI6ImFkYThjNWZkLTQ0N2ItNDUzOC1iYjdlLWZjNjg4NGY2ZmNjOSIsImlhdCI6MTY0MjQzMTUxNywicm9sIjoiYXBpX2FjY2VzcyIsImlkIjoiNzRkYzMyMzYtZmQ1MS00NjU4LTgyN2QtMmIyMjQ1MDI4YjBjIiwibmJmIjoxNjQyNDMxNTE3LCJleHAiOjE2NDI0Mzg3MTYsImlzcyI6IlNpbXBsZUNybS5jb20iLCJhdWQiOiJTaW1wbGVDcm0uY29tIn0._tO4VlPx8A_H1egQ0nlEW7yCXe0qUYdYP-p-2adkR3k
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "phoneNumber": "555.99974",
-  "emailAddress": "j@doe.co.uk",
+  "customerId": 42,
+  "firstName": "Jacenta",
+  "lastName": "Compston",
+  "phoneNumber": "185-978-3943",
+  "emailAddress": "Jacenta@juno.com",
+  "preferredContactMethod": "None",
   "status": 0
 }

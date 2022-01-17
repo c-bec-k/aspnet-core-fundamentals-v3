@@ -174,9 +174,9 @@ namespace SimpleCrm.WebApi
         app.UseHsts();
       }
       app.UseHttpsRedirection();
+      app.UseResponseCaching();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
-      app.UseResponseCaching();
 
       app.UseOpenApi();
       app.UseSwaggerUi3(settings =>
