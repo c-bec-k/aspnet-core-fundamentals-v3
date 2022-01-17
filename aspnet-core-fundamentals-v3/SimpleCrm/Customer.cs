@@ -26,7 +26,8 @@ namespace SimpleCrm
 
         public InteractionMethod PeferredContactMethod { get; set; }
         public CustomerStatus StatusCode { get; set; }
-        // public DateTimeOffset LastContactDate { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        
     }
 
     public enum InteractionMethod
