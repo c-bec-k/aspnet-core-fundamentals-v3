@@ -26,9 +26,9 @@ namespace SimpleCrm.WebApi.Controllers
     [Route("about")]
     public IActionResult About()
     {
+      _logger.LogInformation("This is a log message!");
       ViewData["Message"] = "Your application description page.";
-      throw new Exception("Sample exception thrown. Please catch me!");
-      // return View();
+      return View();
     }
 
     [Route("contact")]
