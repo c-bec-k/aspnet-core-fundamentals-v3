@@ -148,7 +148,6 @@ namespace SimpleCrm.WebApi.ApiControllers
     [HttpPost("login")]
     public async Task<IActionResult> Post([FromBody] CredentialsViewModel credentials)
     {
-      _logger.LogInformation("This is a log message!");
       if (!ModelState.IsValid)
       {
         return UnprocessableEntity(ModelState);
