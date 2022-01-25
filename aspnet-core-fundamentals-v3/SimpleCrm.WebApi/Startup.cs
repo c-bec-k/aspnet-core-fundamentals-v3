@@ -23,7 +23,7 @@ using NSwag;
 using NSwag.AspNetCore;
 using SimpleCrm;
 using System.Text.Json.Serialization;
-
+using SimpleCrm.WebApi.Filters;
 
 namespace SimpleCrm.WebApi
 {
@@ -155,9 +155,13 @@ namespace SimpleCrm.WebApi
           .AddDefaultUI()
           .AddEntityFrameworkStores<CrmIdentityDbContext>();
 
-      services.AddControllersWithViews()
-              .AddJsonOptions(opts =>{
-                opts.JsonSerializerOptions.Converters.Add( new JsonStringEnumConverter());
+      services.AddControllersWithViews(opt =>
+      {
+        opt.Filters.Add<GlobalExceptionFilter>();
+      })
+              .AddJsonOptions(opts =>
+              {
+                opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
               });
       services.AddRazorPages();
 
@@ -187,14 +191,14 @@ namespace SimpleCrm.WebApi
       app.UseOpenApi();
       app.UseSwaggerUi3(settings =>
             {
-                var microsoftOptions = Configuration.GetSection(nameof(MSAuthSettings));
-                settings.OAuth2Client = new OAuth2ClientSettings
-                {
-                    ClientId = microsoftOptions[nameof(MSAuthSettings.ClientId)],
-                    ClientSecret = microsoftOptions[nameof(MSAuthSettings.ClientSecret)],
-                    AppName = "Simple CRM",
-                    Realm = "Nexul Academy"
-                };
+              var microsoftOptions = Configuration.GetSection(nameof(MSAuthSettings));
+              settings.OAuth2Client = new OAuth2ClientSettings
+              {
+                ClientId = microsoftOptions[nameof(MSAuthSettings.ClientId)],
+                ClientSecret = microsoftOptions[nameof(MSAuthSettings.ClientSecret)],
+                AppName = "Simple CRM",
+                Realm = "Nexul Academy"
+              };
             });
 
 
