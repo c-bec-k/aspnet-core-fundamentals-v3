@@ -60,6 +60,10 @@ namespace SimpleCrm.WebApi.ApiControllers
     [ResponseCache(Duration = 60 * 60 * 24 * 2, Location = ResponseCacheLocation.Client)]
     public IActionResult Get(int id)
     {
+      if (id == 1)
+      {
+        throw new ApiException("Bad customer ID, please try again >_<");
+      }
       var cust = _customerData.Get(id);
       if (cust == null)
       {

@@ -67,7 +67,7 @@ namespace SimpleCrm.SqlDbServices
         }
       }
 
-      
+
       IQueryable<Customer> sortedResults = _context.Customers.OrderBy(orderBy);
 
       if (!string.IsNullOrWhiteSpace(listParameters.LastName))

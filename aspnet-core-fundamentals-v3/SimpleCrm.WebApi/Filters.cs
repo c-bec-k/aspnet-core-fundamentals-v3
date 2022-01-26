@@ -23,13 +23,20 @@ namespace SimpleCrm.WebApi.Filters
 
     public void OnException(ExceptionContext context)
     {
+      var apiException = context.Exception as ApiException;
+      var msg = apiException != null ? apiException.Message
+          : "The system is down. Please try again";
+      var statusCode = apiException != null ? apiException.StatusCode : 500;
+      {
+
+      }
       context.Result = new ObjectResult(new JSONerror
       {
         success = false,
-        messages = new List<string> { context.Exception.Message, context.Exception.Source },
+        messages = new List<string> { msg },
       })
       {
-        StatusCode = 500
+        StatusCode = statusCode
       };
     }
   }
