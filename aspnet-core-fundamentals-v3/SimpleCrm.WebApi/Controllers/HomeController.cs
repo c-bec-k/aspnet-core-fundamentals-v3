@@ -26,7 +26,6 @@ namespace SimpleCrm.WebApi.Controllers
     [Route("about")]
     public IActionResult About()
     {
-      _logger.LogInformation("This is a log message!");
       ViewData["Message"] = "Your application description page.";
       return View();
     }
