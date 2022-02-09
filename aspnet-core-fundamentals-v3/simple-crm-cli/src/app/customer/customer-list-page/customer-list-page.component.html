@@ -45,5 +45,22 @@
     <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
   </table>
 </mat-card>
+<div *ngFor="let customer of customers$ | async">
+  <mat-card>
+    <mat-card-title>{{customer.firstName}} {{customer.lastName}}</mat-card-title>
+    <mat-card-subtitle>{{customer.statusCode.replace('_', ' ') | titlecase}}</mat-card-subtitle>
+    <mat-card-content>
+      <p>Phone Number: {{customer.phoneNumber}}</p>
+      <p>Email Address: {{customer.emailAddress}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="openDetail(customer)">
+        <mat-icon>edit</mat-icon>
+        <span> Edit</span>
+      </button>
+    </mat-card-actions>
+    <mat-card-footer>Last Contact Date: {{customer.lastContactDate | date: 'MMM d, yyyy'}}</mat-card-footer>
+  </mat-card>
+</div>
 </section>
 
