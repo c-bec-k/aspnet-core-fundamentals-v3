@@ -7,7 +7,17 @@
       <mat-icon aria-label="Add Customer">add</mat-icon>
     </button>
   </mat-card-title>
-  <table mat-table [dataSource]="customers$" matSort>
+<!-- Add customer filter -->
+<form class="example-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Find customer</mat-label>
+    <input type="text" matInput [formControl]="filterInput">
+    <mat-icon matSuffix>filter_alt</mat-icon>
+  </mat-form-field>
+</form>
+
+
+  <table mat-table [dataSource]="filteredCustomers$" matSort>
     <ng-container matColumnDef="icon">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
@@ -45,7 +55,7 @@
     <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
   </table>
 </mat-card>
-<div *ngFor="let customer of customers$ | async">
+<div *ngFor="let customer of filteredCustomers$ | async">
   <mat-card>
     <mat-card-title>{{customer.firstName}} {{customer.lastName}}</mat-card-title>
     <mat-card-subtitle>{{customer.statusCode.replace('_', ' ') | titlecase}}</mat-card-subtitle>

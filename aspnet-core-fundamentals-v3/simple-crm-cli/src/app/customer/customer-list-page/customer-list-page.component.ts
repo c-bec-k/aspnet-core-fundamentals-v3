@@ -3,10 +3,13 @@ import { Customer } from '../customer.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { CustomerService } from '../customer.service';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { map, startWith, tap } from 'rxjs/operators';
 import { CustomerCreateDialogComponent } from '../customer-create-dialog/customer-create-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+
 
 
 @Component({
@@ -16,7 +19,8 @@ import { Router } from '@angular/router';
 })
 export class CustomerListPageComponent implements OnInit, AfterViewInit {
   customers$!: Observable<Customer[]>;
-
+  filteredCustomers$!: Observable<Customer[]>;
+  filterInput = new FormControl();
   dataSource!: MatTableDataSource<Customer>; // The ! tells Angular you know it may be used before it is set.  Try it without to see the error
   displayColumns = ['icon', 'name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
 
@@ -28,6 +32,17 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog
     ) {
     this.customers$ = this.customerService.search('');
+    this.filteredCustomers$ = combineLatest([this.customers$, this.filterInput.valueChanges.pipe(startWith(""))]).pipe(
+      tap(([customers, filter])=> console.log(customers)),
+      map(([customers, filter])=>{
+       return customers.filter((cust)=>{
+         return (`${cust.firstName} ${cust.lastName}`.toLowerCase().includes(filter.toLowerCase()) ||
+              cust.emailAddress.toLowerCase().includes(filter.toLowerCase()) ||
+              cust.phoneNumber.includes(filter)
+            )
+        });
+      })
+    )
   }
 
   @ViewChild(MatSort) sort!: MatSort;
