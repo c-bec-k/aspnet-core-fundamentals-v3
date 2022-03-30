@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedGuard } from '../account/authenticated.guard';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerListPageComponent } from './customer-list-page/customer-list-page.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: CustomerDetailComponent
   },
+  {
+    path: 'not-authorized',
+    canActivate: [AuthenticatedGuard],
+    pathMatch: 'full',
+    component: NotAuthorizedComponent
+  }
 ];
 
 @NgModule({

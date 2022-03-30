@@ -21,12 +21,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { StatusIconPipe } from './status-icon.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 
 
 
 @NgModule({
-  declarations: [CustomerListPageComponent, CustomerCreateDialogComponent, CustomerDetailComponent, StatusIconPipe],
+  declarations: [CustomerListPageComponent, CustomerCreateDialogComponent, CustomerDetailComponent, StatusIconPipe, NotAuthorizedComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
