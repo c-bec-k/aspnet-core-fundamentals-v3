@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { CustomerModule } from './customer/customer.module';
 import { AppIconsService } from './app-icons.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AccountRoutingModule } from './account/account-routing.module';
 
 
 
@@ -21,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AccountRoutingModule,
     BrowserAnimationsModule,
     CustomerModule,
     MatToolbarModule,
