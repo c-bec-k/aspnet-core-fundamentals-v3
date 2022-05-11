@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace SimpleCrm.WebApi.ApiControllers
 {
-  [Route("auth")]
+  [Route("api/auth")]
   public class AuthController : Controller
   {
     private readonly UserManager<CrmUser> _userManager;

@@ -12,10 +12,14 @@ export interface MicrosoftOptions {
   state: string;
 }
 
+export interface GoogleOptions {
+
+}
+
 export const anonymousUser = (): UserSummaryViewModel => ({
     name: "Anonymous",
-    id: "nil",
-    emailAddress: "none@email.no",
-    jwt: Math.random().toString(16).slice(2),
+    id: "",
+    emailAddress: "",
+    jwt: "",
     roles: [],
   });

@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { anonymousUser, MicrosoftOptions, UserSummaryViewModel } from './account.model';
+import { anonymousUser, GoogleOptions, MicrosoftOptions, UserSummaryViewModel } from './account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +38,15 @@ export class AccountService {
 
     public loginMicrosoftOptions(): Observable<MicrosoftOptions> {
       // TODO: Add interface for MicrosoftOptions to account.model.ts
-      return this.http.get<MicrosoftOptions>(`${this.baseUrl}external/microsoft`);
+      return this.http.get<MicrosoftOptions>(`${this.baseUrl}/external/microsoft`);
     }
 
-    // TODO: Do this right (using an RxJs pipe from the cachedUser)
+    // Maybe come back and do Google later? Maybe?
+    //
+    // public loginGoogleOptions(): Observable<GoogleOptions> {
+    //   return this.http.get<GoogleOptions>(`${this.baseUrl}external/google`);
+    // }
+
     get isAnonymous(): boolean {
       if (this.cachedUser.value.name === 'Anonymous') return true;
       return false;

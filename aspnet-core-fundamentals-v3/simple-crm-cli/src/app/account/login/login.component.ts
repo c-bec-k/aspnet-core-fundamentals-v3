@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         redirect_uri:
           window.location.origin +
           this.platformLocation.getBaseHrefFromDOM() +
-          'account/signin-microsoft',
+          'signin-microsoft',
       };
       console.log(options.redirect_uri);
       let params = new HttpParams();

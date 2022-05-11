@@ -12,24 +12,18 @@ export class AuthenticatedGuard implements CanActivate {
   constructor(
     private router: Router,
     private accountService: AccountService,
-  ){}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      localStorage.setItem('loginReturnUrl', state.url);
+    localStorage.setItem('loginReturnUrl', state.url);
 
-      // TODO: inject your accountService in the constructor, you'll create it in the next section
+    // TODO: inject your accountService in the constructor, you'll create it in the next section
 
-      return this.accountService.user.pipe(
-        map((user: UserSummaryViewModel) => {
-          if (user.name === 'Anonymous') {
-            return this.router.createUrlTree(['./login']);
-          };
-
-          return true;
-        }),
-      );
+    if (this.accountService.isAnonymous) {
+      return this.router.createUrlTree(['./login']);
+    };
+    return true;
   }
-
 }
