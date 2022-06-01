@@ -33,11 +33,12 @@ export class AccountService {
 
     setUser(user: UserSummaryViewModel): void {
       this.cachedUser.next(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      const currUser = this.verifyUser(user);
+      localStorage.setItem('currentUser', JSON.stringify(currUser));
     }
 
     public loginMicrosoftOptions(): Observable<MicrosoftOptions> {
-      // TODO: Add interface for MicrosoftOptions to account.model.ts
+
       return this.http.get<MicrosoftOptions>(`${this.baseUrl}/external/microsoft`);
     }
 
@@ -51,4 +52,34 @@ export class AccountService {
       if (this.cachedUser.value.name === 'Anonymous') return true;
       return false;
     }
+
+    loginComplete(user: UserSummaryViewModel, _message: string) {
+      this.setUser(user);
+    }
+
+    logout(options: { navigate: boolean } = {navigate: true }): void {
+      this.cachedUser.next(anonymousUser());
+      localStorage.removeItem('currentUser');
+      if (options && options.navigate) {
+        // window.location.href = this.envronmentServices.environment.server;
+      }
+
+    }
+
+    loginMicrosoft(code: string, state: string): Observable<UserSummaryViewModel> {
+      const body = { accessToken: code, state, baseHref: this.platformLocation.getBaseHrefFromDOM() };
+      return this.http.post<UserSummaryViewModel>(`${this.baseUrl}/external/microsoft`, body);
+    }
+
+    verifyUser(user: UserSummaryViewModel): Observable<UserSummaryViewModel> {
+      const model = {};
+      const options = !user || !user.jwt ? {} :
+            { headers: {Authorization: `Bearer ${user.jwt}` }};
+      return this.http.post<UserSummaryViewModel>(
+        `${this.baseUrl}/verify`,
+        model,
+        options
+      )
+    }
+
 }

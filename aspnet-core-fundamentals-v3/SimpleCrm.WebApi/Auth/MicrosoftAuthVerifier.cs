@@ -106,7 +106,7 @@ namespace SimpleCrm.WebApi.Auth
         {
           IsSuccessful = true,
           DisplayName = graphPayload.Value<string>("displayName"),
-          Mail = graphPayload.Value<string>("mail"),
+          Mail = graphPayload.Value<string>("mail") ?? graphPayload.Value<string>("userPrincipalName"),
           MobilePhone = graphPayload.Value<string>("mobilePhone")
         };
 

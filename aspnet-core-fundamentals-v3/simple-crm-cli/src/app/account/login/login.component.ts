@@ -9,7 +9,7 @@ import { AccountService } from '../account.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginType: 'undecided' | 'password' | 'microsoft' | 'google' = 'undecided';
 
   constructor(
@@ -17,9 +17,6 @@ export class LoginComponent implements OnInit {
     private platformLocation: PlatformLocation,
     private snackBar: MatSnackBar
   ) { }
-
-  ngOnInit(): void {
-  }
 
   useMicrosoft(): void {
     this.loginType = 'microsoft';

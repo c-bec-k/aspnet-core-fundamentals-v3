@@ -7,47 +7,47 @@
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="Microsoft.AspNetCore.SpaServices"/>
-		<None Remove="Microsoft.AspNetCore.SpaServices.Extensions"/>
-		<None Remove="Microsoft.AspNetCore.Authentication.Google"/>
-		<None Remove="Auth\"/>
-		<None Remove="Microsoft.AspNetCore.Authentication.MicrosoftAccount"/>
-		<None Remove="Microsoft.AspNetCore.Authentication.JwtBearer"/>
+		<None Remove="Microsoft.AspNetCore.SpaServices" />
+		<None Remove="Microsoft.AspNetCore.SpaServices.Extensions" />
+		<None Remove="Microsoft.AspNetCore.Authentication.Google" />
+		<None Remove="Auth\" />
+		<None Remove="Microsoft.AspNetCore.Authentication.MicrosoftAccount" />
+		<None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+		<None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleCrm\SimpleCrm.csproj"/>
-		<ProjectReference Include="..\SimpleCrm.SqlDbServices\SimpleCrm.SqlDbServices.csproj"/>
+		<ProjectReference Include="..\SimpleCrm\SimpleCrm.csproj" />
+		<ProjectReference Include="..\SimpleCrm.SqlDbServices\SimpleCrm.SqlDbServices.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.22"/>
-		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.1"/>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1"/>
-		<PackageReference Include="NSwag.AspNetCore" Version="13.15.5"/>
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.25" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+		<PackageReference Include="NSwag.AspNetCore" Version="13.15.10" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="ApiControllers\"/>
-		<Folder Include="Auth\"/>
+		<Folder Include="ApiControllers\" />
+		<Folder Include="Auth\" />
 	</ItemGroup>
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
 		<Exec Command="node --version" ContinueOnError="true">
-			<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+			<Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
 		</Exec>
-		<Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE."/>
-		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..."/>
-		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install"/>
+		<Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
 	</Target>
 </Project>
