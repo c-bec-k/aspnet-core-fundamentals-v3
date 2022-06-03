@@ -12,6 +12,8 @@ import { CustomerModule } from './customer/customer.module';
 import { AppIconsService } from './app-icons.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AccountRoutingModule } from './account/account-routing.module';
+import { JwtIntecptorInterceptor } from './account/jwt-intecptor.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -31,9 +33,10 @@ import { AccountRoutingModule } from './account/account-routing.module';
     MatListModule,
     MatDatepickerModule,
   ],
-  providers: [AppIconsService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtIntecptorInterceptor, multi: true}, AppIconsService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(iconService: AppIconsService) {}
  }

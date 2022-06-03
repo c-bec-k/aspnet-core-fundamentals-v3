@@ -35,7 +35,6 @@ namespace SimpleCrm.WebApi.ApiControllers
       _linkGenerator = linkGenerator;
     }
 
-    // [AllowAnonymous]
     [HttpGet("", Name = "GetCustomers")] // GET /api/customer
     public IActionResult GetAll([FromQuery] CustomerListParameters listParameters)
     {

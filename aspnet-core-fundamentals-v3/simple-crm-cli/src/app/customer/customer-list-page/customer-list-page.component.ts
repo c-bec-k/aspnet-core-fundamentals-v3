@@ -33,7 +33,6 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
     ) {
     this.customers$ = this.customerService.search('');
     this.filteredCustomers$ = combineLatest([this.customers$, this.filterInput.valueChanges.pipe(startWith(""))]).pipe(
-      tap(([customers, filter])=> console.log(customers)),
       map(([customers, filter])=>{
        return customers.filter((cust)=>{
          return (`${cust.firstName} ${cust.lastName}`.toLowerCase().includes(filter.toLowerCase()) ||
@@ -50,7 +49,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
   openDetail(item: Customer): void {
     if(item) {
-      this.router.navigate([`./customer/${item.customerId}`])
+      this.router.navigate([`./customers/${item.customerId}`])
     }
   }
 

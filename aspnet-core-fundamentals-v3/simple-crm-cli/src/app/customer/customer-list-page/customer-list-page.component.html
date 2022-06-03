@@ -55,7 +55,7 @@
     <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
   </table>
 </mat-card>
-<div *ngFor="let customer of filteredCustomers$ | async">
+<!-- <div *ngFor="let customer of filteredCustomers$ | async">
   <mat-card>
     <mat-card-title>{{customer.firstName}} {{customer.lastName}}</mat-card-title>
     <mat-card-subtitle>{{customer.statusCode.replace('_', ' ') | titlecase}}</mat-card-subtitle>
@@ -71,6 +71,6 @@
     </mat-card-actions>
     <mat-card-footer>Last Contact Date: {{customer.lastContactDate | date: 'MMM d, yyyy'}}</mat-card-footer>
   </mat-card>
-</div>
+</div> -->
 </section>
 

@@ -23,7 +23,9 @@ export class AccountService {
       this.baseUrl = `${environment.server}${environment.apiUrl}auth`;
       const cu = localStorage.getItem('currentUser');
       if (cu) {
-        this.cachedUser.next(JSON.parse(cu));
+        const curUser = JSON.parse(cu);
+        this.cachedUser.next(curUser);
+        this.verifyUser(curUser).subscribe({next: (user) => this.setUser(user)});
       }
      }
 
@@ -33,8 +35,7 @@ export class AccountService {
 
     setUser(user: UserSummaryViewModel): void {
       this.cachedUser.next(user);
-      const currUser = this.verifyUser(user);
-      localStorage.setItem('currentUser', JSON.stringify(currUser));
+      localStorage.setItem('currentUser', JSON.stringify(user));
     }
 
     public loginMicrosoftOptions(): Observable<MicrosoftOptions> {

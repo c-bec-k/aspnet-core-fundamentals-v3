@@ -46,11 +46,6 @@ import { NotAuthorizedComponent } from '../account/not-authorized/not-authorized
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [
-    {
-      provide: CustomerService,
-      useClass: CustomerMockService
-
-    }]
+  providers: [CustomerService]
 })
 export class CustomerModule { }

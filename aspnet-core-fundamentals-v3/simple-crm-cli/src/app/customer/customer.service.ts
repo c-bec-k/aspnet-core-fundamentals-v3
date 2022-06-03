@@ -11,11 +11,11 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   search(term: string): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`/api/customer/search?term=${term}`);
+    return this.http.get<Customer[]>(`/api/customer/?term=${term}`);
   }
 
   insert(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>('/api/customer/save', customer);
+    return this.http.post<Customer>('/api/customer/', customer);
   }
 
   update(customer: Customer): Observable<Customer> {
