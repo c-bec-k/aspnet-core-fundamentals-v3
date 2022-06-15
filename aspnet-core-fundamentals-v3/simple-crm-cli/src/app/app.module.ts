@@ -14,6 +14,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AccountRoutingModule } from './account/account-routing.module';
 import { JwtIntecptorInterceptor } from './account/jwt-intecptor.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { layoutFeatureKey, layoutReducer } from './store/layout.store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 
@@ -32,6 +35,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatSidenavModule,
     MatListModule,
     MatDatepickerModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(layoutFeatureKey, layoutReducer),
+    StoreDevtoolsModule.instrument({
+      name: 'Nexul Academy — SimpleCRM'
+    })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtIntecptorInterceptor, multi: true}, AppIconsService],
   bootstrap: [AppComponent]
