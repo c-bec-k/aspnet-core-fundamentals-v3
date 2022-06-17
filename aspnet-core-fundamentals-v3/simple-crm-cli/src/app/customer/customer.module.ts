@@ -22,6 +22,8 @@ import { StatusIconPipe } from './status-icon.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NotAuthorizedComponent } from '../account/not-authorized/not-authorized.component';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomerStoreEffects } from '../store/customer.store.effects';
 
 
 
@@ -44,7 +46,8 @@ import { NotAuthorizedComponent } from '../account/not-authorized/not-authorized
     MatSelectModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    EffectsModule.forFeature([CustomerStoreEffects])
   ],
   providers: [CustomerService]
 })
