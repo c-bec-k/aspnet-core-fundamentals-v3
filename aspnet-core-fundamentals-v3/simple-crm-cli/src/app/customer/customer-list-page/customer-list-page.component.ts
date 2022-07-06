@@ -9,8 +9,10 @@ import { CustomerCreateDialogComponent } from '../customer-create-dialog/custome
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-
-
+import { select, Store } from '@ngrx/store';
+import { CustomerState } from 'src/app/store/customer.store.model';
+import { selectCustomers } from '../../store/customer.store.selectors';
+import { searchCustomersAction } from 'src/app/store/customer.store';
 
 @Component({
   selector: 'crm-customer-list-page',
@@ -25,13 +27,14 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   displayColumns = ['icon', 'name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
 
 
-
   constructor(
     private customerService: CustomerService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store<CustomerState>
     ) {
-    this.customers$ = this.customerService.search('');
+    this.customers$ = this.store.pipe(select(selectCustomers));
+    this.store.dispatch(searchCustomersAction({criteria: {term: ""}}));
     this.filteredCustomers$ = combineLatest([this.customers$, this.filterInput.valueChanges.pipe(startWith(""))]).pipe(
       map(([customers, filter])=>{
        return customers.filter((cust)=>{
@@ -49,7 +52,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
   openDetail(item: Customer): void {
     if(item) {
-      this.router.navigate([`./customers/${item.customerId}`])
+      this.router.navigate([`./customers/${item.id}`])
     }
   }
 
@@ -67,7 +70,7 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
     {
       if (customer === undefined) {return;}
       this.customerService.insert(customer).subscribe( e => {
-        this.customers$ = this.customerService.search('');
+        this.store.dispatch(searchCustomersAction({criteria: {term: ""}}));
       });
     });
   }

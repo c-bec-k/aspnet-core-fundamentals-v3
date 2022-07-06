@@ -7,7 +7,6 @@ import { CustomerListPageComponent } from './customer-list-page/customer-list-pa
 import { MatSortModule } from '@angular/material/sort';
 import { CustomerService } from './customer.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CustomerMockService } from './customer-mock.service';
 import { FlexLayoutModule}  from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,9 +23,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NotAuthorizedComponent } from '../account/not-authorized/not-authorized.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomerStoreEffects } from '../store/customer.store.effects';
-
-
-
+import { StoreModule } from '@ngrx/store';
+import { customerFeatureKey } from '../store/customer.store.selectors'
+import { customerReducer } from '../store/customer.store'
 
 @NgModule({
   declarations: [CustomerListPageComponent, CustomerCreateDialogComponent, CustomerDetailComponent, StatusIconPipe, NotAuthorizedComponent],
@@ -47,7 +46,8 @@ import { CustomerStoreEffects } from '../store/customer.store.effects';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    EffectsModule.forFeature([CustomerStoreEffects])
+    EffectsModule.forFeature([CustomerStoreEffects]),
+    StoreModule.forFeature(customerFeatureKey, customerReducer)
   ],
   providers: [CustomerService]
 })

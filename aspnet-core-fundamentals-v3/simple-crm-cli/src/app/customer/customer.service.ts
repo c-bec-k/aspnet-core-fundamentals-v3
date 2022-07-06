@@ -19,7 +19,7 @@ export class CustomerService {
   }
 
   update(customer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`api/customer/${customer.customerId}`, customer);
+    return this.http.put<Customer>(`api/customer/${customer.id}`, customer);
   }
 
   get(customerId: number): Observable<Customer | undefined> {

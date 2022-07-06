@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { CustomerService } from '../customer/customer.service';
+import { searchCustomersAction, searchCustomersCompleteAction } from './customer.store';
 
 @Injectable()
 
@@ -10,10 +11,10 @@ export class CustomerStoreEffects {
 
   searchCustomers$ = createEffect( () => this.actions$.pipe(
     ofType(searchCustomersAction),
-    switchMap({criteria}) => this.custSvc.search(criteria.term).pipe(
+    switchMap( ({criteria}) => this.custSvc.search(criteria.term).pipe(
       map(
-        data => searchCustomersCompleteAction({result: data});
-      )
+        data => searchCustomersCompleteAction({result: data})
+      ))
     )
-  ));
+  ))
 }
