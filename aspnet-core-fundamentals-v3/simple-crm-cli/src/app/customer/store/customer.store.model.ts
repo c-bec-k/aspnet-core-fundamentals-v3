@@ -1,5 +1,5 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { Customer } from "../customer/customer.model";
+import { Customer } from "../../customer/customer.model";
 
 export interface customerSearchCriteria {
   term: string

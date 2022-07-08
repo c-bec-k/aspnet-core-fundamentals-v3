@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Customer } from '../customer.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -10,28 +10,29 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { CustomerState } from 'src/app/store/customer.store.model';
-import { selectCustomers } from '../../store/customer.store.selectors';
-import { searchCustomersAction } from 'src/app/store/customer.store';
+import { CustomerState } from '../store/customer.store.model';
+import { selectCustomers } from '../store/customer.store.selectors';
+import { searchCustomersAction } from '../store/customer.store';
 
 @Component({
   selector: 'crm-customer-list-page',
   templateUrl: './customer-list-page.component.html',
-  styleUrls: ['./customer-list-page.component.css']
+  styleUrls: ['./customer-list-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
 export class CustomerListPageComponent implements OnInit, AfterViewInit {
   customers$!: Observable<Customer[]>;
   filteredCustomers$!: Observable<Customer[]>;
   filterInput = new FormControl();
   dataSource!: MatTableDataSource<Customer>; // The ! tells Angular you know it may be used before it is set.  Try it without to see the error
-  displayColumns = ['icon', 'name', 'phoneNumber', 'emailAddress', 'statusCode', 'lastContactDate', 'edit'];
 
 
   constructor(
     private customerService: CustomerService,
-    private router: Router,
     public dialog: MatDialog,
-    private store: Store<CustomerState>
+    private store: Store<CustomerState>,
     ) {
     this.customers$ = this.store.pipe(select(selectCustomers));
     this.store.dispatch(searchCustomersAction({criteria: {term: ""}}));
@@ -44,17 +45,12 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
             )
         });
       })
-    )
+    );
   }
 
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void { }
-  openDetail(item: Customer): void {
-    if(item) {
-      this.router.navigate([`./customers/${item.id}`])
-    }
-  }
 
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
@@ -74,7 +70,4 @@ export class CustomerListPageComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
-
-
 }

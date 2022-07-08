@@ -22,13 +22,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NotAuthorizedComponent } from '../account/not-authorized/not-authorized.component';
 import { EffectsModule } from '@ngrx/effects';
-import { CustomerStoreEffects } from '../store/customer.store.effects';
+import { CustomerStoreEffects } from './store/customer.store.effects';
 import { StoreModule } from '@ngrx/store';
-import { customerFeatureKey } from '../store/customer.store.selectors'
-import { customerReducer } from '../store/customer.store'
+import { customerFeatureKey } from './store/customer.store.selectors'
+import { customerReducer } from './store/customer.store';
+import { CustomerListTableComponentComponent } from './customer-list-table-component/customer-list-table-component.component'
 
 @NgModule({
-  declarations: [CustomerListPageComponent, CustomerCreateDialogComponent, CustomerDetailComponent, StatusIconPipe, NotAuthorizedComponent],
+  declarations: [CustomerListPageComponent, CustomerCreateDialogComponent, CustomerDetailComponent, StatusIconPipe, NotAuthorizedComponent, CustomerListTableComponentComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

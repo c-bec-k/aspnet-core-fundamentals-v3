@@ -1,5 +1,5 @@
 import { Action, createAction, createReducer, props, on } from "@ngrx/store";
-import { Customer } from "../customer/customer.model";
+import { Customer } from "../../customer/customer.model";
 import { customerSearchCriteria, CustomerState, customerStateAdapter, initialCustomerState } from "./customer.store.model";
 
 export const searchCustomersAction = createAction(
